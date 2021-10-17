@@ -1,0 +1,34 @@
+{
+    // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+    // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+    // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Electron Main",
+            "program": "${workspaceFolder}/script.js",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "Open index.html",
+            "file": "c:\\Users\\asero\\Documents\\main\\index.html"
+        }
+
+        {
+            "less.compile": {
+              "compress": true, // true => remove surplus whitespace
+              "sourceMap": true, // true => generate source maps (.css.map files)
+              "out": false // false => DON'T output .css files (overridable per-file, see below)
+            }
+          }
+    ]
+}
