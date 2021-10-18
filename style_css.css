@@ -1,23 +1,22 @@
 *{
-    transition: width 2s, height 2s, background-color 2s, transform 2s;;
+    transition: width 2s, height 2s, background-color 2s, transform 2s;
+   
 }
 
 div{
-    height: 500px;
-    width: 500px;
+    height: 300px;
+    width: 300px;
     background-color: red;
-}
-
-
-.div_test{   
     border: solid 10px black;
-    position: fixed;
-    top: 0;
-    right: 0;
 }
-
 li{
     font-size: 30px;
+}
+
+/* //////////////////////////////////////////// */
+
+.div_test_link{
+    background-color: rgb(242, 68, 68);
 }
 
 .a1:focus{
@@ -28,27 +27,42 @@ color: chartreuse;
 color: cyan;
 }
 
-.div_test:hover{
-    transform:  rotate(0.25turn);
-    transform: scale(-0.5, -0.5);    
-}
-
 
 .li3::after{
     content: "after";
     color: green;
 }
 .li3::before{
-    content: "before";
-    color: green;
+    content: "before"t;
+    color:green;
+}
+
+/* /////////////////////////////////////////////// */
+
+.div_test{   
+    background-color: rgb(131, 38, 38);
+    font-size: 100px;
+    flex-wrap: wrap;
 }
 
 
 
+.div_test:hover{
+    transform:  rotate(0.25turn);
+    transform: scale(-0.5, -0.5);    
+}
+
+
+/* ///////////////////////////////////////////// */
+
+
 .div_menu{
+    background-color: rgb(232, 88, 11);
     height: 50px;
     width: 50px;
     position: relative;
+    border: solid 10px black;
+    
 }
 
 .menu{
@@ -57,9 +71,34 @@ color: cyan;
     background-color: darkorange;
     opacity: 0;
     padding: 0;
+    
+}
+
+.menu>* {    
+    color: red;
+    font-size: 50px;
 }
 
 .menu:hover
 {
     opacity: 1;
+}
+
+
+/* ////////////////////////////////////////////////// */
+
+ .div_flex{
+ height: 100%;
+ width: 50%;
+ border: solid 10px rgb(173, 216, 18);
+ background-color: rgb(255, 255, 255);
+
+
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+
+
+
 }
