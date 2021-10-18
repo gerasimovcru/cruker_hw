@@ -20,11 +20,11 @@ li {
   color: cyan;
 }
 .li3::after {
-  content: "after";
+  content: "aft";
   color: green;
 }
 .li3::before {
-  content: "before";
+  content: "bef";
   color: green;
 }
 .div_test {
