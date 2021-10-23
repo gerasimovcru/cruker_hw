@@ -1,5 +1,7 @@
 poisk.onclick = function() {
-	let str = document.getElementById('text').value;	
+	let str = document.getElementById('text').value;
+	str = str.toLowerCase();
+	//console.log(str);	
 	max_vord(str);
 }
 
