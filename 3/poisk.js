@@ -3,15 +3,19 @@ poisk.onclick = function() {
 	str = str.toLowerCase();
 	//console.log(str);	
 	max_vord(str);
+	
 }
 
  function max_vord(str){
+	 
+	if(typeof str  === 'string' ){
 	 
 	let vord = [];
     let i = 0;
 
 	let vords = split_str_f(str);
    
+	if(vords !== null){
 	if(vords.size > 0){
 	
 		i = 0;
@@ -42,9 +46,14 @@ poisk.onclick = function() {
 			}
 		vords.clear();
 	}else{
-		console.log("ERROR: Line is empty or line contains only empty characters");
-		alert("ERROR: Line is empty or line contains only empty characters");
+		console.log("ERROR: Line is empty");// or line contains only empty characters");
+		alert("ERROR: Line is empty");// or line contains only empty characters");
 		vords.clear();
+	}
+	}
+	}else{
+	console.log("ERROR: Not a string");
+		alert("ERROR: Not a string");	
 	}
 
  }
@@ -56,11 +65,12 @@ poisk.onclick = function() {
         
 		//let split_str = str.split(/[\s* , . ? ! ; : + - _ = ( ) " ' ` @ # $ % ^ & * № < > − 1 2 3 4 5 6 7 8 9 0]+/);//добавить любые символы которые не могут быть "словами" 
 		
-        let split_str = str.split(/[\s* , . ? ! ; : " ' ` - _ ( ) − { } [ = + < >]+/);
+        let split_str = str.split(/[\s , . ? ! ; : " ' ` - _ ( ) − { } [ = + < >]+/);
+		console.log(split_str);
         
         split_str = delete_not_words(split_str);
 
-        //console.log(split_str.length);
+        
        
         if(split_str.length>0){
 		    vords.set(split_str[0], 1);
@@ -78,20 +88,34 @@ poisk.onclick = function() {
 		    vords.delete('');
             vords.delete('-');//
             vords.delete('−');//я хз они не убираются
+			
+			return vords;
         
-        }
+        }else{			
+			console.log("ERROR: Line does not contain a word");
+			alert("ERROR: Line does not contain a word");
+			vords.clear();
+			return null;		
+		}
 		
-		return vords;
+		//return vords;
        
  }
 
  function delete_not_words(split_str){
+	 //console.log(split_str.length);
 
     for(let i = 0; i<split_str.length; i++){
-        
-        if(split_str[i].split(/[ @ # $ % ^ & * № 1 2 3 4 5 6 7 8 9 0]+/).length > 1){
-            split_str.splice(i, 1);           
+        //console.log(i, split_str[i], split_str[i].split(/[@#$%^&*№1234567890]+/).length);
+        if(split_str[i].split(/[@#$%^&*№1234567890]+/).length > 1){			
+            split_str.splice(i, 1);
+			i--;			
+						
         }
     }
     return split_str;
  }
+
+ 
+//let num = 123;
+// max_vord(num);
