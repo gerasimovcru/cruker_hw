@@ -50,25 +50,19 @@ class Tree<T> {
         if (!node) {
             return "";
         }
-
         let li = "";
         let ul;
         if (node.value !== null) {
-            if (position === "root") {
-                li += "<li> root: " + node.value + this.show(node.right, "right") + "</li>";
-                li += this.show(node.left, "left");
-            }
-            if (position === "right") {
-                li += "<li> right: " + node.value + this.show(node.right, "right") + "</li>";
-                li += this.show(node.left, "left");
-            }
-            if (position === "left") {
-                li += "<li> left: " + node.value + this.show(node.right, "right") + "</li>";
-                li += this.show(node.left, "left");
-            }
+                li += "<div class = 'value'>" + position + ": " + node.value + "</div>";
+                if (node.right !== null) {
+                    li += "<div class = 'knot right'>" + this.show(node.right, "right") + "</div>";
+                }
+                if (node.left !== null) {
+                    li += "<div class = 'knot left'>" + this.show(node.left, "left") + "</div>";
+                }
         }
         if (li) {
-            ul = "<ul>" + li + "</ul>" ;
+            ul =  li ;
         }
 
         console.log(node.value);
@@ -182,6 +176,7 @@ export class Browses{
         this.dell = document.getElementById("dell");
 
     }
+
 
 
     buttonPress(): void{

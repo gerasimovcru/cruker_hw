@@ -1,0 +1,25 @@
+#container{
+    /*border: blue 10px solid;*/
+    position: absolute;
+    overflow: hidden;
+}
+
+div.value{
+    text-align:center;
+    border:red 2px solid;
+    position: relative;
+}
+
+div.knot{
+    /*border: yellow 2px solid;*/
+    position: relative;
+}
+
+div.left{
+    float: left;
+}
+
+div.right{
+    float: right;
+}
+
