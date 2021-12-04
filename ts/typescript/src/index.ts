@@ -36,7 +36,7 @@ class TreeNode<T>{
     }
 }
 
-class Tree<T>{
+class Tree<T> {
 
     root: TreeNode<T> | null;
 
@@ -45,21 +45,30 @@ class Tree<T>{
         this.root = null;
     }
 
-    private show(node: TreeNode<T> | null = this.root): string{
+    private show(node: TreeNode<T> | null = this.root, position: string | null = "root"): string {
 
-        if (!node){
+        if (!node) {
             return "";
         }
 
         let li = "";
         let ul;
         if (node.value !== null) {
-
-            li += "<li>" + node.value + this.show(node.right) + "</li>";
-            li += this.show(node.left) ;
+            if (position === "root") {
+                li += "<li> root: " + node.value + this.show(node.right, "right") + "</li>";
+                li += this.show(node.left, "left");
+            }
+            if (position === "right") {
+                li += "<li> right: " + node.value + this.show(node.right, "right") + "</li>";
+                li += this.show(node.left, "left");
+            }
+            if (position === "left") {
+                li += "<li> left: " + node.value + this.show(node.right, "right") + "</li>";
+                li += this.show(node.left, "left");
+            }
         }
         if (li) {
-            ul = "<ul>" + li + "</ul>";
+            ul = "<ul>" + li + "</ul>" ;
         }
 
         console.log(node.value);
@@ -70,7 +79,7 @@ class Tree<T>{
     private minimum(node: TreeNode<T> | null = this.root): T | undefined {
 
         let min;
-        if (!node){
+        if (!node) {
             return min;
         }
 
@@ -85,34 +94,34 @@ class Tree<T>{
 
     }
 
-    search(node: TreeNode<T> | null = this.root, key: T):  T | undefined {
-         if (!node){
-             return undefined;
-         }
-         if ((node !== null) && (key !== node.value)) {
-             if (key < node.value) {
-                 this.search(node.left, key);
-             } else {
-                 this.search(node.right, key);
-             }
-         }
-         return node.value;
-     }
+    search(node: TreeNode<T> | null = this.root, key: T): T | undefined {
+        if (!node) {
+            return undefined;
+        }
+        if ((node !== null) && (key !== node.value)) {
+            if (key < node.value) {
+                this.search(node.left, key);
+            } else {
+                this.search(node.right, key);
+            }
+        }
+        return node.value;
+    }
 
-    createTreeTable(): void{
+    createTreeTable(): void {
         const container = document.getElementById("container");
         if (container !== null) {
             container.innerHTML = <string> this.show();
         }
     }
 
-    delete(node: TreeNode<T> | null = this.root, key: T ): TreeNode<T> | null{
+    delete(node: TreeNode<T> | null = this.root, key: T): TreeNode<T> | null {
 
-        if (!node){
+        if (!node) {
             return null;
         }
 
-        if (key < node.value){
+        if (key < node.value) {
             node.left = this.delete(node.left, key);
         } else if (key > node.value) {
             node.right = this.delete(node.right, key);
@@ -131,38 +140,37 @@ class Tree<T>{
 
     }
 
-    add(value: T): TreeNode<T> | undefined{
+    add(value: T): TreeNode<T> | undefined {
 
         const newNode = new TreeNode(value, null, null);
-        if (!this.root){
+        if (!this.root) {
             this.root = newNode;
             return newNode;
         }
 
-        if (typeof(value) === typeof(this.root.value)){
+        let currNode = this.root;
 
-            let currNode = this.root;
-
-            while (currNode){
-                if (newNode.value < currNode.value){
-                    if (!currNode.left){
-                        currNode.left = newNode;
-                        return currNode.left;
-                    }
-                    currNode = currNode.left;
-                } else {
-                    if (!currNode.right){
-                        currNode.right = newNode;
-                        return currNode.right;
-                    }
-                    currNode = currNode.right;
+        while (currNode) {
+            if (newNode.value < currNode.value) {
+                if (!currNode.left) {
+                    currNode.left = newNode;
+                    return currNode.left;
                 }
+                currNode = currNode.left;
+            } else {
+                if (!currNode.right) {
+                    currNode.right = newNode;
+                    return currNode.right;
+                }
+                currNode = currNode.right;
             }
         }
         return newNode;
     }
 
 }
+
+
 
 export class Browses{
     public setBut: HTMLElement | null;
@@ -174,6 +182,7 @@ export class Browses{
         this.dell = document.getElementById("dell");
 
     }
+
 
     buttonPress(): void{
         if (this.setBut !== null) {
