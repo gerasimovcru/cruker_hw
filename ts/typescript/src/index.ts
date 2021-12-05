@@ -52,7 +52,7 @@ class Tree<T> {
         this._root = value;
     }
 
-    private show(searchValue: T | undefined = undefined, node: TreeNode<T> | null = this._root, position: string | null = "root"): string {
+    private show(searchValue: T | undefined = undefined, node: TreeNode<T> | null = this._root, position: string | null = "root", firstValueFlag: number = 0): string {
 
         if (!node) {
             return "";
@@ -60,20 +60,19 @@ class Tree<T> {
         let li = "";
         let ul;
         if (node.value !== null) {
-            if (node.value === searchValue) {
+            if ((node.value === searchValue) && (firstValueFlag === 0)) {
                 li += "<div class = 'value searchValue'>" + position + "->" + node.value + "</div>";
-
+                firstValueFlag = 1;// можно изменить на 0 чтобы отобразить все(одинаковые) числа при поиске
             } else {
-
                 li += "<div class = 'value'>" + position + ": " + node.value + "</div>";
             }
 
                 if (node.right !== null) {
-                    li += "<div class = 'knot right'>" + this.show(searchValue, node.right, "right") + "</div>";
+                    li += "<div class = 'knot right'>" + this.show(searchValue, node.right, "right", firstValueFlag) + "</div>";
                 }
 
                 if (node.left !== null) {
-                    li += "<div class = 'knot left'>" + this.show(searchValue, node.left, "left") + "</div>";
+                    li += "<div class = 'knot left'>" + this.show(searchValue, node.left, "left", firstValueFlag) + "</div>";
                 }
         }
         if (li) {
