@@ -244,10 +244,8 @@ export class Browses{
                 if (data !== null) {
                     const value = data.valueAsNumber;
                     const searchValue = this.tree.search(this.tree.root, value);
-                    if (searchValue !== undefined) {
-                        alert(`Value: ${searchValue}`);
-                    } else {
-                        alert("ERROR: no such value");
+                    if (searchValue === undefined) {
+                        alert(`ERROR: tree not have value = ${value}`);
                     }
                     this.tree.createTreeTable(value);
 
