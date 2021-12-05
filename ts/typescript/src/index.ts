@@ -45,7 +45,7 @@ class Tree<T> {
         this.root = null;
     }
 
-    private show(node: TreeNode<T> | null = this.root, position: string | null = "root"): string {
+    private show(searchValue: T | undefined = undefined, node: TreeNode<T> | null = this.root, position: string | null = "root"): string {
 
         if (!node) {
             return "";
@@ -53,12 +53,20 @@ class Tree<T> {
         let li = "";
         let ul;
         if (node.value !== null) {
+            if (node.value === searchValue) {
+                li += "<div class = 'value searchValue'>" + position + "->" + node.value + "</div>";
+
+            } else {
+
                 li += "<div class = 'value'>" + position + ": " + node.value + "</div>";
+            }
+
                 if (node.right !== null) {
-                    li += "<div class = 'knot right'>" + this.show(node.right, "right") + "</div>";
+                    li += "<div class = 'knot right'>" + this.show(searchValue, node.right, "right") + "</div>";
                 }
+
                 if (node.left !== null) {
-                    li += "<div class = 'knot left'>" + this.show(node.left, "left") + "</div>";
+                    li += "<div class = 'knot left'>" + this.show(searchValue, node.left, "left") + "</div>";
                 }
         }
         if (li) {
@@ -89,23 +97,30 @@ class Tree<T> {
     }
 
     search(node: TreeNode<T> | null = this.root, key: T): T | undefined {
+
+        let searchValue;
         if (!node) {
             return undefined;
         }
-        if ((node !== null) && (key !== node.value)) {
-            if (key < node.value) {
-                this.search(node.left, key);
+
+        if (node !== null) {
+            if (key === node.value) {
+                searchValue = node.value;
             } else {
-                this.search(node.right, key);
+                if (key < node.value) {
+                    searchValue = this.search(node.left, key);
+                } else {
+                    searchValue = this.search(node.right, key);
+                }
             }
         }
-        return node.value;
+        return searchValue;
     }
 
-    createTreeTable(): void {
+    createTreeTable(value: T | undefined = undefined): void {
         const container = document.getElementById("container");
         if (container !== null) {
-            container.innerHTML = <string> this.show();
+            container.innerHTML = <string> this.show(value);
         }
     }
 
@@ -164,24 +179,24 @@ class Tree<T> {
 
 }
 
-
-
 export class Browses{
-    public setBut: HTMLElement | null;
-    public dell: HTMLElement | null;
+    public setButton: HTMLElement | null;
+    public dellButton: HTMLElement | null;
+    public searchButton: HTMLElement | null;
     private tree = new Tree();
 
     constructor() {
-        this.setBut = document.getElementById("setBut");
-        this.dell = document.getElementById("dell");
+        this.setButton = document.getElementById("setBut");
+        this.dellButton = document.getElementById("dellBut");
+        this.searchButton = document.getElementById("searchBut");
 
     }
 
 
 
     buttonPress(): void{
-        if (this.setBut !== null) {
-            this.setBut.onclick = (): void => {
+        if (this.setButton !== null) {
+            this.setButton.onclick = (): void => {
                 const data = <HTMLInputElement> document.getElementById("data");
                 if (data !== null) {
                     const value = data.valueAsNumber;
@@ -191,8 +206,8 @@ export class Browses{
                 }
             };
         }
-        if (this.dell !== null) {
-            this.dell.onclick = (): void => {
+        if (this.dellButton !== null) {
+            this.dellButton.onclick = (): void => {
                 const data = <HTMLInputElement> document.getElementById("data");
                 if (data !== null) {
                     const value = data.valueAsNumber;
@@ -203,10 +218,29 @@ export class Browses{
             };
         }
 
+        if (this.searchButton !== null) {
+            this.searchButton.onclick = (): void => {
+                const data = <HTMLInputElement> document.getElementById("data");
+                if (data !== null) {
+                    const value = data.valueAsNumber;
+                    const searchValue = this.tree.search(this.tree.root, value);
+                    if (searchValue !== undefined) {
+                        alert(`Value: ${searchValue}`);
+                    } else {
+                        alert("ERROR: no such value");
+                    }
+                    this.tree.createTreeTable(value);
+
+                }
+            };
+        }
+
 
     }
 
 }
+
+
 
 
 

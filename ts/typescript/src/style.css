@@ -6,7 +6,7 @@
 
 div.value{
     text-align:center;
-    border:red 2px solid;
+    border:black 2px solid;
     position: relative;
 }
 
@@ -15,11 +15,29 @@ div.knot{
     position: relative;
 }
 
+div.searchValue{
+    border:red 2px solid;
+    color: #7b0505;
+}
+
 div.left{
     float: left;
+}
+div.left::before{
+    position: relative;
+    content: "  |\0a_|";
+    left: 40%;
+    white-space: pre;
 }
 
 div.right{
     float: right;
+}
+
+div.right::before{
+    position: relative;
+    content: "|\0a|_";
+    left: 50%;
+    white-space: pre;
 }
 
