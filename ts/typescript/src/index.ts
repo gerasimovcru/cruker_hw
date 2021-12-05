@@ -38,14 +38,21 @@ class TreeNode<T>{
 
 class Tree<T> {
 
-    root: TreeNode<T> | null;
-
+    private _root: TreeNode<T> | null;
 
     constructor() {
-        this.root = null;
+        this._root = null;
     }
 
-    private show(searchValue: T | undefined = undefined, node: TreeNode<T> | null = this.root, position: string | null = "root"): string {
+    get root(): TreeNode<T> | null {
+        return this._root;
+    }
+
+    set root(value: TreeNode<T> | null) {
+        this._root = value;
+    }
+
+    private show(searchValue: T | undefined = undefined, node: TreeNode<T> | null = this._root, position: string | null = "root"): string {
 
         if (!node) {
             return "";
@@ -78,7 +85,7 @@ class Tree<T> {
         return ul ?? "";
     }
 
-    private minimum(node: TreeNode<T> | null = this.root): T | undefined {
+    private minimum(node: TreeNode<T> | null = this._root): T | undefined {
 
         let min;
         if (!node) {
@@ -96,7 +103,7 @@ class Tree<T> {
 
     }
 
-    private maximum(node: TreeNode<T> | null = this.root): T | undefined{
+    private maximum(node: TreeNode<T> | null = this._root): T | undefined{
 
         let max;
         if (!node) {
@@ -113,7 +120,7 @@ class Tree<T> {
     }
 
 
-    search(node: TreeNode<T> | null = this.root, key: T): T | undefined {
+    search(node: TreeNode<T> | null = this._root, key: T): T | undefined {
 
         let searchValue;
         if (!node) {
@@ -141,7 +148,7 @@ class Tree<T> {
         }
     }
 
-    delete(node: TreeNode<T> | null = this.root, key: T): TreeNode<T> | null {
+    delete(node: TreeNode<T> | null = this._root, key: T): TreeNode<T> | null {
 
         if (!node) {
             return null;
@@ -158,8 +165,8 @@ class Tree<T> {
             node.value = <T><unknown> this.maximum(node.left);
             node.left = this.delete(node.left, node.value);
         } else {
-            if ((node === this.root) && (node?.value === key)) {
-                this.root = null;
+            if ((node === this._root) && (node?.value === key)) {
+                this._root = null;
                 node = null;
             }
             node = null;
@@ -172,12 +179,12 @@ class Tree<T> {
     add(value: T): TreeNode<T> | undefined {
 
         const newNode = new TreeNode(value, null, null);
-        if (!this.root) {
-            this.root = newNode;
+        if (!this._root) {
+            this._root = newNode;
             return newNode;
         }
 
-        let currNode = this.root;
+        let currNode = this._root;
 
         while (currNode) {
             if (newNode.value < currNode.value) {
@@ -209,9 +216,7 @@ export class Browses{
         this.setButton = document.getElementById("setBut");
         this.dellButton = document.getElementById("dellBut");
         this.searchButton = document.getElementById("searchBut");
-
     }
-
 
 
     buttonPress(): void{
@@ -261,8 +266,5 @@ export class Browses{
 
 
 
-
-
 const BTP = new Browses();
 BTP.buttonPress();
-
