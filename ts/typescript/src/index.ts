@@ -96,6 +96,23 @@ class Tree<T> {
 
     }
 
+    private maximum(node: TreeNode<T> | null = this.root): T | undefined{
+
+        let max;
+        if (!node) {
+            return max;
+        }
+        if (node.right !== null){
+            max = this.maximum(node.right);
+        } else {
+            max = node.value;
+        }
+
+        return max;
+
+    }
+
+
     search(node: TreeNode<T> | null = this.root, key: T): T | undefined {
 
         let searchValue;
@@ -134,14 +151,17 @@ class Tree<T> {
             node.left = this.delete(node.left, key);
         } else if (key > node.value) {
             node.right = this.delete(node.right, key);
-        } else if ((node.left !== null) && (node.right !== null)) {
+        } else if (node.right !== null) {
             node.value = <T><unknown> this.minimum(node.right);
             node.right = this.delete(node.right, node.value);
-        } else if (node.left != null) {
-            node = node.left;
-        } else if (node.right != null) {
-            node = node.right;
+        } else if (node.left !== null) {
+            node.value = <T><unknown> this.maximum(node.left);
+            node.left = this.delete(node.left, node.value);
         } else {
+            if ((node === this.root) && (node?.value === key)) {
+                this.root = null;
+                node = null;
+            }
             node = null;
         }
 
