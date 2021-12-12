@@ -1,0 +1,38 @@
+<div class="mainDiv">
+
+<button class="start" (click)="getStudent()">start</button><br />
+<table class="students">
+  <tr><th><button class="buttonSort" (click)="sortStudent('Name')">\/</button>Name</th><th><button class="buttonSort" (click)="sortStudent('Surname')">\/</button>Surname</th>
+    <th><button class="buttonSort" (click)="sortStudent('Patronymic')">\/</button>Patronymic</th><th><button class="buttonSort" (click)="sortStudent('Date')">\/</button>Date</th>
+    <th><button class="buttonSort" (click)="sortStudent('Score')">\/</button>Score</th></tr>
+
+  <tr [ngClass]="{'search': student.isChanged}" *ngFor="let student of resultStudentList"><td><button class="buttonDelete" (click)="saveIndex(student)">-</button>{{student.studentName}}</td><td>{{student.studentSurname}}</td>
+    <td>{{student.studentPatronymic}}</td> <td>{{student.studentDate.day}}.{{student.studentDate.month}}.{{student.studentDate.year}}</td><td>{{student.studentScore}}</td></tr>
+</table><br />
+
+<div class="methods">
+<div class="searchStudent">
+<input class="searchStudent" [(ngModel)]="searchStudent" >
+<button (click)="searchStudents()">search</button>search student
+</div><br />
+
+<div class="filterThreeStudent"><input type="checkbox" [(ngModel)]="filterThreeCheck" (change)="filterThreeStudent()"> score < 3</div><br />
+
+<div class="filterStudent">
+filter Student for date  <button (click)="filterStudent('forDate')">filter</button><br />
+<input type="date" class="minDate" [(ngModel)]="minDate" /> - <input type="date" class="maxDate" [(ngModel)]="maxDate" /><br />
+filter Student for score  <button (click)="filterStudent('forScore')">filter</button><br />
+<input type="number" class="minScore" [(ngModel)]="minScore" /> - <input type="namber" class="maxScore" [(ngModel)]="maxScore" /><br />
+  <button (click)="discharge()">discharge</button></div>
+</div>
+</div>
+
+
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    delete this student?
+  </div>
+  <button (click)="deleteStudent()">yes</button>
+  <button (click)="no()">no</button>
+</div>

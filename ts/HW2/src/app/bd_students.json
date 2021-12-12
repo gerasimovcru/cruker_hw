@@ -1,0 +1,20 @@
+[
+  {
+    "students": "#",
+    "text": "Home",
+    "icon": ""
+  },
+  {
+    "href": "#",
+    "text": "Bundles",
+    "icon": "",
+    "children": [
+      {
+        "href": "#national",
+        "text": "National",
+        "icon": "assets/images/national.svg"
+      }
+    ]
+  }
+]
+
