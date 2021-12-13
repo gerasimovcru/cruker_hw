@@ -1,4 +1,4 @@
-<div class="mainDiv">
+<div class="mainDiv" xmlns="http://www.w3.org/1999/html">
 
 <button class="start" (click)="getStudent()">start</button>
 <table class="students">
@@ -24,17 +24,17 @@
     <button (click)="searchStudents()">search</button>
   </div>
   <div class="filterThreeStudent" id="filterThreeStudent">
-    <input type="checkbox" [(ngModel)]="filterThreeCheck" (change)="filterThreeStudent()">mark unsuccessful students
+    <input type="checkbox" [(ngModel)]="filterThreeCheck" (change)="filterThreeStudent()"><b>mark unsuccessful students</b>
   </div>
   <div class="filterStudentForDate" id="filterStudentForDate">
-    filter Student for date  <button (click)="filterStudent('forDate')">filter</button><br />
+    <b>filter Student for date</b><br />
     <input type="date" class="minDate" [(ngModel)]="minDate" /> - <input type="date" class="maxDate" [(ngModel)]="maxDate" /><br />
-    <button (click)="discharge()">discharge</button>
+    <button (click)="filterStudent('forDate')">filter</button><button (click)="discharge()">discharge</button>
   </div>
   <div class="filterStudentForScore" id="filterStudentForScore">
-    filter Student for score  <button (click)="filterStudent('forScore')">filter</button><br />
+    <b>filter Student for score</b><br />
     <input type="number" class="minScore" [(ngModel)]="minScore" /> - <input type="namber" class="maxScore" [(ngModel)]="maxScore" /><br />
-    <button (click)="discharge()">discharge</button>
+    <button (click)="filterStudent('forScore')">filter</button><button (click)="discharge()">discharge</button>
   </div>
 
 </div>

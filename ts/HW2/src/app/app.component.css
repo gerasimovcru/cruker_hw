@@ -62,6 +62,9 @@ div.filterStudentForScore{
 div.filterStudentForDate{
   display: none;
 }
+b{
+  left: 20px;
+}
 /*-----------------------*/
 .popup{
   display: none;
