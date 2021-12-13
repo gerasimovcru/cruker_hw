@@ -1,38 +1,52 @@
 <div class="mainDiv">
 
-<button class="start" (click)="getStudent()">start</button><br />
+<button class="start" (click)="getStudent()">start</button>
 <table class="students">
   <tr><th><button class="buttonSort" (click)="sortStudent('Name')">\/</button>Name</th><th><button class="buttonSort" (click)="sortStudent('Surname')">\/</button>Surname</th>
     <th><button class="buttonSort" (click)="sortStudent('Patronymic')">\/</button>Patronymic</th><th><button class="buttonSort" (click)="sortStudent('Date')">\/</button>Date</th>
     <th><button class="buttonSort" (click)="sortStudent('Score')">\/</button>Score</th></tr>
 
-  <tr [ngClass]="{'search': student.isChanged}" *ngFor="let student of resultStudentList"><td><button class="buttonDelete" (click)="saveIndex(student)">-</button>{{student.studentName}}</td><td>{{student.studentSurname}}</td>
+  <tr [ngClass]="{'searchStudent': student.isChanged.searchStudent, 'filterThreeStudent': student.isChanged.filterThreeStudent}" *ngFor="let student of resultStudentList">
+    <td><button class="buttonDelete" (click)="saveIndex(student)">-</button>{{student.studentName}}</td><td>{{student.studentSurname}}</td>
     <td>{{student.studentPatronymic}}</td> <td>{{student.studentDate.day}}.{{student.studentDate.month}}.{{student.studentDate.year}}</td><td>{{student.studentScore}}</td></tr>
 </table><br />
 
+<select size="4" class="methods">
+  <option (click)="methods('searchStudent')">Search student</option>
+  <option (click)="methods('filterThreeStudent')">Unsuccessful students</option>
+  <option (click)="methods('filterStudentForDate')">Filter student for date</option>
+  <option (click)="methods('filterStudentForScore')">Filter student for score</option>
+</select>
+
 <div class="methods">
-<div class="searchStudent">
-<input class="searchStudent" [(ngModel)]="searchStudent" >
-<button (click)="searchStudents()">search</button>search student
-</div><br />
+  <div class="searchStudent" id="searchStudent">
+    <input class="searchStudent" [(ngModel)]="searchStudent" >
+    <button (click)="searchStudents()">search</button>
+  </div>
+  <div class="filterThreeStudent" id="filterThreeStudent">
+    <input type="checkbox" [(ngModel)]="filterThreeCheck" (change)="filterThreeStudent()">mark unsuccessful students
+  </div>
+  <div class="filterStudentForDate" id="filterStudentForDate">
+    filter Student for date  <button (click)="filterStudent('forDate')">filter</button><br />
+    <input type="date" class="minDate" [(ngModel)]="minDate" /> - <input type="date" class="maxDate" [(ngModel)]="maxDate" /><br />
+    <button (click)="discharge()">discharge</button>
+  </div>
+  <div class="filterStudentForScore" id="filterStudentForScore">
+    filter Student for score  <button (click)="filterStudent('forScore')">filter</button><br />
+    <input type="number" class="minScore" [(ngModel)]="minScore" /> - <input type="namber" class="maxScore" [(ngModel)]="maxScore" /><br />
+    <button (click)="discharge()">discharge</button>
+  </div>
 
-<div class="filterThreeStudent"><input type="checkbox" [(ngModel)]="filterThreeCheck" (change)="filterThreeStudent()"> score < 3</div><br />
-
-<div class="filterStudent">
-filter Student for date  <button (click)="filterStudent('forDate')">filter</button><br />
-<input type="date" class="minDate" [(ngModel)]="minDate" /> - <input type="date" class="maxDate" [(ngModel)]="maxDate" /><br />
-filter Student for score  <button (click)="filterStudent('forScore')">filter</button><br />
-<input type="number" class="minScore" [(ngModel)]="minScore" /> - <input type="namber" class="maxScore" [(ngModel)]="maxScore" /><br />
-  <button (click)="discharge()">discharge</button></div>
 </div>
 </div>
+
 
 
 
 <div class="popup" id="popup">
   <div class="popup-content">
-    delete this student?
+    Delete this student?
   </div>
-  <button (click)="deleteStudent()">yes</button>
-  <button (click)="no()">no</button>
+  <button class="popupButtonYes" (click)="deleteStudent()">yes</button>
+  <button class="popupButtonNo" (click)="no()">no</button>
 </div>

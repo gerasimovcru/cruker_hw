@@ -1,8 +1,11 @@
 .mainDiv{
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
+
+/*-----------------------*/
 
 .start{
   width: 100px;
@@ -12,6 +15,8 @@
   margin-right: auto
 
 }
+
+/*-----------------------*/
 
 table{
   position: relative;
@@ -30,26 +35,63 @@ tr td:last-child {
   white-space: nowrap;
 }
 
-.search{
+tr.searchStudent{
   color: red;
 }
 
+tr.filterThreeStudent{
+  color: blue;
+}
 
+/*-----------------------*/
+
+div.methods {
+  display: block;
+  position: relative;
+}
+
+div.searchStudent {
+  display: none;
+}
+div.filterThreeStudent{
+  display: none;
+}
+div.filterStudentForScore{
+  display: none;
+}
+div.filterStudentForDate{
+  display: none;
+}
+/*-----------------------*/
 .popup{
   display: none;
-  width:100%;
-  height: 2000px;
+  height: 200px;
+  width: 200px;
   background-color: rgba(0,0,0,0.5);
-  position:fixed;
-  top:0px;
-}
-
-.popup .popup-content{
-  display: inline-block;
   position: relative;
-  width:200px;
-  height: 10px;
-  padding:10px;
-  background-color: #c5c5c5;
+  left: 45%;
+  top: 50%;
 }
 
+.popup-content {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  size: 30px;
+  font-size: 35px;
+}
+
+.popupButtonYes{
+  position: absolute;
+  height: 30px;
+  width: 50px;
+  bottom: 10px;
+  left: 15px;
+}
+.popupButtonNo{
+  position: absolute;
+  height: 30px;
+  width: 50px;
+  bottom: 10px;
+  right: 15px;
+}
