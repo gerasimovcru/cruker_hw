@@ -26,7 +26,7 @@ export class AppComponent {
 
 
   public studentList: { studentName: string; studentSurname: string; studentPatronymic: string;
-    studentDate: { day: number, month: number, year: number }; studentScore: number; isChanged: {searchStudent: boolean, filterThreeStudent: boolean }; }[] = [];
+    studentDate: { day: number, month: number, year: number }; studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean }; }[] = [];
 
   resultStudentList = this.studentList;
 
@@ -36,13 +36,13 @@ export class AppComponent {
     this.studentList.splice(0, this.studentList.length);
 
     const student1 = { studentName: "string6", studentSurname: "string21", studentPatronymic: "string31",
-      studentDate: { day: 1, month: 12, year: 2001 }, studentScore: 2, isChanged: {searchStudent: false,  filterThreeStudent: false } };
+      studentDate: { day: 1, month: 12, year: 2001 }, studentScore: 2, isChanged: { searchStudent: false,  filterThreeStudent: false } };
 
     const student2 = { studentName: "string3", studentSurname: "string22", studentPatronymic: "string32",
-      studentDate: { day: 2, month: 2, year: 2001 }, studentScore: 22, isChanged: {searchStudent: false,  filterThreeStudent: false } };
+      studentDate: { day: 2, month: 2, year: 2001 }, studentScore: 22, isChanged: { searchStudent: false,  filterThreeStudent: false } };
 
     const student3 = { studentName: "string8", studentSurname: "string23", studentPatronymic: "string33",
-      studentDate: { day: 1, month: 12, year: 2001 }, studentScore: 222, isChanged: {searchStudent: false,  filterThreeStudent: false } };
+      studentDate: { day: 1, month: 12, year: 2001 }, studentScore: 222, isChanged: { searchStudent: false,  filterThreeStudent: false } };
 
     this.studentList.push(student1);
     this.studentList.push(student2);
@@ -55,13 +55,13 @@ export class AppComponent {
 
   public searchStudents(nameOrSurname: string | undefined = this.searchStudent): void{
 
-    let student;
 
-    student = nameOrSurname?.split(/[\s*]+/);
-    if(student[0] === ''){
+
+    const student = nameOrSurname?.split(/[\s*]+/);
+    if (student[0] === ""){
       student.shift();
     }
-    if(student[student.length-1] === ''){
+    if (student[student.length - 1] === ""){
       student.pop();
     }
 
@@ -70,8 +70,8 @@ export class AppComponent {
       value.isChanged.searchStudent = false;
 
       if (student.length === 2) {
-        if ((value["studentName"] === student[0]) && (value["studentSurname"] === student[1]) ||
-          (value["studentName"] === student[1]) && (value["studentSurname"] === student[0])) {
+        if (((value["studentName"] === student[0]) && (value["studentSurname"] === student[1])) ||
+          ((value["studentName"] === student[1]) && (value["studentSurname"] === student[0]))) {
           value.isChanged.searchStudent = true;
         }
       }
@@ -226,7 +226,8 @@ export class AppComponent {
       this.resultStudentList = this.studentList;
   }
 
-  public saveIndex(student: { studentName: string; studentSurname: string; studentPatronymic: string; studentDate: { day: number; month: number; year: number }; studentScore: number; isChanged: { searchStudent: boolean; filterThreeStudent: boolean } }): void{
+  public saveIndex(student: { studentName: string; studentSurname: string; studentPatronymic: string; studentDate: { day: number, month: number, year: number };
+    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean }; }): void{
 
     this.index = this.studentList.indexOf(student);
 
@@ -255,19 +256,19 @@ export class AppComponent {
   private methodsClear(): void {
 
     let methods;
-    methods = document.getElementById("searchStudent")
+    methods = document.getElementById("searchStudent");
     if (methods !== null) {
       methods.style.display = "none";
     }
-    methods = document.getElementById("filterThreeStudent")
+    methods = document.getElementById("filterThreeStudent");
     if (methods !== null) {
       methods.style.display = "none";
     }
-    methods = document.getElementById("filterStudentForDate")
+    methods = document.getElementById("filterStudentForDate");
     if (methods !== null) {
       methods.style.display = "none";
     }
-    methods = document.getElementById("filterStudentForScore")
+    methods = document.getElementById("filterStudentForScore");
     if (methods !== null) {
       methods.style.display = "none";
     }
@@ -281,28 +282,28 @@ export class AppComponent {
 
     switch (methodsSwitch) {
       case "searchStudent":
-        methods = document.getElementById("searchStudent")
+        methods = document.getElementById("searchStudent");
         if (methods !== null) {
           methods.style.display = "block";
         }
         break;
 
       case "filterThreeStudent":
-        methods = document.getElementById("filterThreeStudent")
+        methods = document.getElementById("filterThreeStudent");
         if (methods !== null) {
           methods.style.display = "block";
         }
         break;
 
       case "filterStudentForDate":
-        methods = document.getElementById("filterStudentForDate")
+        methods = document.getElementById("filterStudentForDate");
         if (methods !== null) {
           methods.style.display = "block";
         }
         break;
 
       case "filterStudentForScore":
-        methods = document.getElementById("filterStudentForScore")
+        methods = document.getElementById("filterStudentForScore");
         if (methods !== null) {
           methods.style.display = "block";
         }
