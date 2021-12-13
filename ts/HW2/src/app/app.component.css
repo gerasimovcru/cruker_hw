@@ -53,16 +53,16 @@ div.methods {
 }
 
 div.searchStudent {
-  display: none;
+  display: block;
 }
 div.filterThreeStudent{
-  display: none;
+  display: block;
 }
 div.filterStudentForScore{
-  display: none;
+  display: block;
 }
 div.filterStudentForDate{
-  display: none;
+  display: block;
 }
 b{
   left: 20px;

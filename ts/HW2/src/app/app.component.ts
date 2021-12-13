@@ -21,7 +21,6 @@ import { Component } from "@angular/core";
 
 export class AppComponent {
 
-  title = "HW2";
   searchStudent = "";
   filterThreeCheck = false;
 
@@ -31,6 +30,12 @@ export class AppComponent {
   public minDate: string | undefined;
   public maxDate: string | undefined;
 
+  searchStudentChanged = false;
+  filterThreeStudentChanged = false;
+  filterStudentForDateChanged = false;
+  filterStudentForScoreChanged= false;
+
+  confirmation = false;
 
   public studentList: { studentName: string; studentSurname: string; studentPatronymic: string;
     studentDate: { day: number, month: number, year: number }; studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean }; }[] = [];
@@ -56,8 +61,6 @@ export class AppComponent {
     this.studentList.push(student3);
 
   }
-
-
 
 
   public searchStudents(nameOrSurname: string | undefined = this.searchStudent): void{
@@ -238,18 +241,12 @@ export class AppComponent {
 
     this.index = this.studentList.indexOf(student);
 
-    const popup = document.getElementById("popup");
-    if (popup !== null) {
-      popup.style.display = "block";
-    }
+    this.confirmation = true;
 
   }
 
   public no(): void{
-    const popup = document.getElementById("popup");
-    if (popup !== null) {
-      popup.style.display = "none";
-    }
+    this.confirmation = false;
   }
 
   public deleteStudent(): void {
@@ -262,58 +259,35 @@ export class AppComponent {
 
   private methodsClear(): void {
 
-    let methods;
-    methods = document.getElementById("searchStudent");
-    if (methods !== null) {
-      methods.style.display = "none";
-    }
-    methods = document.getElementById("filterThreeStudent");
-    if (methods !== null) {
-      methods.style.display = "none";
-    }
-    methods = document.getElementById("filterStudentForDate");
-    if (methods !== null) {
-      methods.style.display = "none";
-    }
-    methods = document.getElementById("filterStudentForScore");
-    if (methods !== null) {
-      methods.style.display = "none";
-    }
+    this.searchStudentChanged = false;
+    this.filterThreeStudentChanged = false;
+    this.filterStudentForDateChanged = false;
+    this.filterStudentForScoreChanged= false;
   }
 
   public methods(methodsSwitch: string): void {
-
-    let methods;
 
     this.methodsClear();
 
     switch (methodsSwitch) {
       case "searchStudent":
-        methods = document.getElementById("searchStudent");
-        if (methods !== null) {
-          methods.style.display = "block";
-        }
+
+        this.searchStudentChanged = true;
         break;
 
       case "filterThreeStudent":
-        methods = document.getElementById("filterThreeStudent");
-        if (methods !== null) {
-          methods.style.display = "block";
-        }
+
+        this.filterThreeStudentChanged = true;
         break;
 
       case "filterStudentForDate":
-        methods = document.getElementById("filterStudentForDate");
-        if (methods !== null) {
-          methods.style.display = "block";
-        }
+
+        this.filterStudentForDateChanged = true;
         break;
 
       case "filterStudentForScore":
-        methods = document.getElementById("filterStudentForScore");
-        if (methods !== null) {
-          methods.style.display = "block";
-        }
+
+        this.filterStudentForScoreChanged= true;
         break;
 
       default:

@@ -19,19 +19,19 @@
 </select>
 
 <div class="methods">
-  <div class="searchStudent" id="searchStudent">
+  <div [style.display]="searchStudentChanged===true?'block':'none'"   id="searchStudent">
     <input class="searchStudent" [(ngModel)]="searchStudent" >
     <button (click)="searchStudents()">search</button>
   </div>
-  <div class="filterThreeStudent" id="filterThreeStudent">
+  <div [style.display]="filterThreeStudentChanged===true?'block':'none'" id="filterThreeStudent">
     <input type="checkbox" [(ngModel)]="filterThreeCheck" (change)="filterThreeStudent()"><b>mark unsuccessful students</b>
   </div>
-  <div class="filterStudentForDate" id="filterStudentForDate">
+  <div [style.display]="filterStudentForDateChanged===true?'block':'none'" id="filterStudentForDate">
     <b>filter Student for date</b><br />
     <input type="date" class="minDate" [(ngModel)]="minDate" /> - <input type="date" class="maxDate" [(ngModel)]="maxDate" /><br />
     <button (click)="filterStudent('forDate')">filter</button><button (click)="discharge()">discharge</button>
   </div>
-  <div class="filterStudentForScore" id="filterStudentForScore">
+  <div [style.display]="filterStudentForScoreChanged===true?'block':'none'" id="filterStudentForScore">
     <b>filter Student for score</b><br />
     <input type="number" class="minScore" [(ngModel)]="minScore" /> - <input type="namber" class="maxScore" [(ngModel)]="maxScore" /><br />
     <button (click)="filterStudent('forScore')">filter</button><button (click)="discharge()">discharge</button>
@@ -43,7 +43,7 @@
 
 
 
-<div class="popup" id="popup">
+<div [style.display]="confirmation===true?'block':'none'" class="popup" id="popup">
   <div class="popup-content">
     Delete this student?
   </div>
