@@ -60,27 +60,27 @@ export class AppComponent {
       studentName: "string6",
       studentSurname: "string21",
       studentPatronymic: "string31",
-      studentDate: {day: 2, month: 12, year: 2001},
+      studentDate: { day: 2, month: 12, year: 2001 },
       studentScore: 2,
-      isChanged: {searchStudent: false, filterThreeStudent: false}
+      isChanged: { searchStudent: false, filterThreeStudent: false }
     };
 
     const student2 = {
       studentName: "string3",
       studentSurname: "string22",
       studentPatronymic: "string32",
-      studentDate: {day: 2, month: 2, year: 2005},
+      studentDate: { day: 2, month: 2, year: 2005 },
       studentScore: 22,
-      isChanged: {searchStudent: false, filterThreeStudent: false}
+      isChanged: { searchStudent: false, filterThreeStudent: false }
     };
 
     const student3 = {
       studentName: "string8",
       studentSurname: "string23",
       studentPatronymic: "string33",
-      studentDate: {day: 1, month: 12, year: 2010},
+      studentDate: { day: 1, month: 12, year: 2010 },
       studentScore: 222,
-      isChanged: {searchStudent: false, filterThreeStudent: false}
+      isChanged: { searchStudent: false, filterThreeStudent: false }
     };
 
     this.studentList.push(student1);
@@ -131,13 +131,13 @@ export class AppComponent {
     }
   }
 
-  private sortOf(Column: string): void{
+  private sortOf(column: string): void{
     this.nameSort = false;
     this.surnameSort = false;
     this.patronymicSort = false;
     this.dataSort = false;
     this.scoreSort = false;
-    switch (Column) {
+    switch (column) {
       case "Name":
         this.nameSort = true;
         break;
@@ -257,8 +257,7 @@ export class AppComponent {
     let maxScore = this.maxScore;
 
 
-    //switch (deleteFor) {
-    console.log(this.minScore);
+    // switch (deleteFor) {
     // case "forDate":
 
       if ((this.minDate !== undefined) && (this.maxDate !== undefined)) {
@@ -286,18 +285,18 @@ export class AppComponent {
         (score.studentScore >= minScore) && (score.studentScore <= maxScore)));
     }
 
-
-
       //  break;
 
-      //default:
-    //}
+      // default:
+    // }
 
   }
 
 
   public discharge(): void {
     this.resultStudentList = this.studentList;
+    this.searchStudent = "";
+    this.searchStudents(this.searchStudent);
   }
 
   public saveIndex(student: {
