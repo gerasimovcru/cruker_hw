@@ -30,31 +30,58 @@ export class AppComponent {
   public minDate: string | undefined;
   public maxDate: string | undefined;
 
-  searchStudentChanged = false;
-  filterThreeStudentChanged = false;
-  filterStudentForDateChanged = false;
-  filterStudentForScoreChanged= false;
+  nameSort = false;
+  surnameSort = false;
+  patronymicSort = false;
+  dataSort = false;
+  scoreSort = false;
+
+  buttonDelete = false;
+
+  methods = false;
 
   confirmation = false;
 
-  public studentList: { studentName: string; studentSurname: string; studentPatronymic: string;
-    studentDate: { day: number, month: number, year: number }; studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean }; }[] = [];
+  public studentList: {
+    studentName: string; studentSurname: string; studentPatronymic: string;
+    studentDate: { day: number, month: number, year: number }; studentScore: number; isChanged: {
+      searchStudent: boolean; filterThreeStudent: boolean;
+    };
+  }[] = [];
 
   resultStudentList = this.studentList;
 
 
-  public getStudent(): void{
+  public getStudent(): void {
 
     this.studentList.splice(0, this.studentList.length);
 
-    const student1 = { studentName: "string6", studentSurname: "string21", studentPatronymic: "string31",
-      studentDate: { day: 1, month: 12, year: 2001 }, studentScore: 2, isChanged: { searchStudent: false,  filterThreeStudent: false } };
+    const student1 = {
+      studentName: "string6",
+      studentSurname: "string21",
+      studentPatronymic: "string31",
+      studentDate: {day: 2, month: 12, year: 2001},
+      studentScore: 2,
+      isChanged: {searchStudent: false, filterThreeStudent: false}
+    };
 
-    const student2 = { studentName: "string3", studentSurname: "string22", studentPatronymic: "string32",
-      studentDate: { day: 2, month: 2, year: 2001 }, studentScore: 22, isChanged: { searchStudent: false,  filterThreeStudent: false } };
+    const student2 = {
+      studentName: "string3",
+      studentSurname: "string22",
+      studentPatronymic: "string32",
+      studentDate: {day: 2, month: 2, year: 2005},
+      studentScore: 22,
+      isChanged: {searchStudent: false, filterThreeStudent: false}
+    };
 
-    const student3 = { studentName: "string8", studentSurname: "string23", studentPatronymic: "string33",
-      studentDate: { day: 1, month: 12, year: 2001 }, studentScore: 222, isChanged: { searchStudent: false,  filterThreeStudent: false } };
+    const student3 = {
+      studentName: "string8",
+      studentSurname: "string23",
+      studentPatronymic: "string33",
+      studentDate: {day: 1, month: 12, year: 2010},
+      studentScore: 222,
+      isChanged: {searchStudent: false, filterThreeStudent: false}
+    };
 
     this.studentList.push(student1);
     this.studentList.push(student2);
@@ -63,15 +90,14 @@ export class AppComponent {
   }
 
 
-  public searchStudents(nameOrSurname: string | undefined = this.searchStudent): void{
-
+  public searchStudents(nameOrSurname: string | undefined = this.searchStudent): void {
 
 
     const student = nameOrSurname?.split(/[\s*]+/);
-    if (student[0] === ""){
+    if (student[0] === "") {
       student.shift();
     }
-    if (student[student.length - 1] === ""){
+    if (student[student.length - 1] === "") {
       student.pop();
     }
 
@@ -95,7 +121,7 @@ export class AppComponent {
     }
   }
 
-  public filterThreeStudent(): void{
+  public filterThreeStudent(): void {
     for (const value of this.resultStudentList) {
       value.isChanged.filterThreeStudent = false;
       console.log(this.filterThreeCheck);
@@ -105,10 +131,41 @@ export class AppComponent {
     }
   }
 
-  public sortStudent(tableColumn: string): void{
-
-    switch (tableColumn){
+  private sortOf(Column: string): void{
+    this.nameSort = false;
+    this.surnameSort = false;
+    this.patronymicSort = false;
+    this.dataSort = false;
+    this.scoreSort = false;
+    switch (Column) {
       case "Name":
+        this.nameSort = true;
+        break;
+
+      case "Surname":
+        this.surnameSort = true;
+        break;
+      case "Patronymic":
+        this.patronymicSort = true;
+        break;
+      case "Date":
+        this.dataSort = true;
+        break;
+
+      case "Score":
+        this.scoreSort = true;
+        break;
+
+      default:
+
+    }
+  }
+
+  public sortStudent(tableColumn: string): void {
+    this.sortOf(tableColumn);
+    switch (tableColumn) {
+      case "Name":
+
         this.studentList.sort((a, b) => {
           if (a.studentName > b.studentName) {
             return 1;
@@ -172,7 +229,6 @@ export class AppComponent {
         });
 
 
-
         break;
 
       case "Score":
@@ -193,7 +249,7 @@ export class AppComponent {
 
   }
 
-  public filterStudent(deleteFor: string): void{
+  public filterStudent(): void {
 
     const minDate = this.minDate?.split("-");
     const maxDate = this.maxDate?.split("-");
@@ -201,43 +257,53 @@ export class AppComponent {
     let maxScore = this.maxScore;
 
 
-    switch (deleteFor){
+    //switch (deleteFor) {
+    console.log(this.minScore);
+    // case "forDate":
 
-      case "forScore":
-        if ((this.minScore !== undefined) && (this.maxScore !== undefined)) {
-          if (this.minScore > this.maxScore){
-            minScore = this.maxScore;
-            maxScore = this.minScore;
-          }
-          this.resultStudentList = this.studentList.filter((score) => ((minScore !== undefined) && (maxScore !== undefined) &&
-            (score.studentScore >= minScore) && (score.studentScore <= maxScore)));
-        }
-        break;
+      if ((this.minDate !== undefined) && (this.maxDate !== undefined)) {
 
-      case "forDate":
-
-        if ((this.minDate !== undefined) && (this.maxDate !== undefined)) {
-
-          this.resultStudentList = this.studentList.filter((date) => ((minDate !== undefined) && (maxDate !== undefined) &&
-            (date.studentDate.year >= <number><unknown>minDate[0]) && (date.studentDate.year <= <number><unknown>maxDate[0]) &&
-            (date.studentDate.month >= <number><unknown>minDate[1]) && (date.studentDate.month <= <number><unknown>maxDate[1]) &&
-            (date.studentDate.day >= <number><unknown>minDate[2]) && (date.studentDate.day <= <number><unknown>maxDate[2])));
-        }
+        this.resultStudentList = this.studentList.filter((date) => (((minDate !== undefined) && (maxDate !== undefined)) &&
+          (((date.studentDate.year > <number><unknown>minDate[0]) && (date.studentDate.year < <number><unknown>maxDate[0])) ||
+            ((date.studentDate.year >= <number><unknown>minDate[0]) && (date.studentDate.month > <number><unknown>minDate[1])) ||
+            ((date.studentDate.year >= <number><unknown>minDate[0]) && (date.studentDate.month >= <number><unknown>minDate[1]) && ((date.studentDate.day >= <number><unknown>minDate[2]))) ||
+            ((date.studentDate.year <= <number><unknown>maxDate[0]) && (date.studentDate.month < <number><unknown>maxDate[1])) ||
+            ((date.studentDate.year <= <number><unknown>maxDate[0]) && (date.studentDate.month <= <number><unknown>maxDate[1]) && ((date.studentDate.day <= <number><unknown>maxDate[2]))))));
+      }
 
 
-        break;
 
-      default:
+    // break;
+
+    // case "forScore":
+
+    if ((this.minScore !== undefined) && (this.maxScore !== undefined) && (this.minScore !== null) && (this.maxScore !== null)) {
+      if (this.minScore > this.maxScore) {
+        minScore = this.maxScore;
+        maxScore = this.minScore;
+      }
+      this.resultStudentList = this.resultStudentList.filter((score) => ((minScore !== undefined) && (maxScore !== undefined) &&
+        (score.studentScore >= minScore) && (score.studentScore <= maxScore)));
     }
 
+
+
+      //  break;
+
+      //default:
+    //}
+
   }
 
-  public discharge(): void{
-      this.resultStudentList = this.studentList;
+
+  public discharge(): void {
+    this.resultStudentList = this.studentList;
   }
 
-  public saveIndex(student: { studentName: string; studentSurname: string; studentPatronymic: string; studentDate: { day: number, month: number, year: number };
-    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean }; }): void{
+  public saveIndex(student: {
+    studentName: string; studentSurname: string; studentPatronymic: string; studentDate: { day: number, month: number, year: number };
+    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean };
+  }): void {
 
     this.index = this.studentList.indexOf(student);
 
@@ -245,7 +311,7 @@ export class AppComponent {
 
   }
 
-  public no(): void{
+  public no(): void {
     this.confirmation = false;
   }
 
@@ -257,43 +323,15 @@ export class AppComponent {
     this.no();
   }
 
-  private methodsClear(): void {
+  public methodsOff(): void {
 
-    this.searchStudentChanged = false;
-    this.filterThreeStudentChanged = false;
-    this.filterStudentForDateChanged = false;
-    this.filterStudentForScoreChanged= false;
+    this.methods = false;
+
   }
 
-  public methods(methodsSwitch: string): void {
+  public methodsOn(): void {
 
-    this.methodsClear();
-
-    switch (methodsSwitch) {
-      case "searchStudent":
-
-        this.searchStudentChanged = true;
-        break;
-
-      case "filterThreeStudent":
-
-        this.filterThreeStudentChanged = true;
-        break;
-
-      case "filterStudentForDate":
-
-        this.filterStudentForDateChanged = true;
-        break;
-
-      case "filterStudentForScore":
-
-        this.filterStudentForScoreChanged= true;
-        break;
-
-      default:
-
-    }
-
+    this.methods = true;
 
   }
 

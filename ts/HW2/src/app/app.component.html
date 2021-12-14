@@ -1,49 +1,49 @@
 <div class="mainDiv" xmlns="http://www.w3.org/1999/html">
 
 <button class="start" (click)="getStudent()">start</button>
+  <button class="methods" (click)="methodsOn()">---<br />---</button>
 <table class="students">
-  <tr><th><button class="buttonSort" (click)="sortStudent('Name')">\/</button>Name</th><th><button class="buttonSort" (click)="sortStudent('Surname')">\/</button>Surname</th>
-    <th><button class="buttonSort" (click)="sortStudent('Patronymic')">\/</button>Patronymic</th><th><button class="buttonSort" (click)="sortStudent('Date')">\/</button>Date</th>
-    <th><button class="buttonSort" (click)="sortStudent('Score')">\/</button>Score</th></tr>
+  <tr><th></th><th class="tableUp" (click)="sortStudent('Name')"><b [style.font-weight]="nameSort===true?'bold ':'normal'">Name</b></th>
+    <th class="tableUp" (click)="sortStudent('Surname')"><b [style.font-weight]="surnameSort===true?'bold':'normal '">Surname</b></th>
+    <th class="tableUp" (click)="sortStudent('Patronymic')"><b [style.font-weight]="patronymicSort===true?'bold ':'normal'">Patronymic</b></th>
+    <th class="tableUp" (click)="sortStudent('Date')"><b [style.font-weight]="dataSort===true?'bold ':'normal'">Date</b></th>
+    <th class="tableUp" (click)="sortStudent('Score')"><b [style.font-weight]="scoreSort===true?'bold ':'normal'">Score</b></th></tr>
 
   <tr [ngClass]="{'searchStudent': student.isChanged.searchStudent, 'filterThreeStudent': student.isChanged.filterThreeStudent}" *ngFor="let student of resultStudentList">
-    <td><button class="buttonDelete" (click)="saveIndex(student)">-</button>{{student.studentName}}</td><td>{{student.studentSurname}}</td>
+    <td><button class="buttonDelete" (click)="saveIndex(student)"> - </button></td><td>{{student.studentName}}</td><td>{{student.studentSurname}}</td>
     <td>{{student.studentPatronymic}}</td> <td>{{student.studentDate.day}}.{{student.studentDate.month}}.{{student.studentDate.year}}</td><td>{{student.studentScore}}</td></tr>
 </table><br />
 
-<select size="4" class="methods">
-  <option (click)="methods('searchStudent')">Search student</option>
-  <option (click)="methods('filterThreeStudent')">Unsuccessful students</option>
-  <option (click)="methods('filterStudentForDate')">Filter student for date</option>
-  <option (click)="methods('filterStudentForScore')">Filter student for score</option>
-</select>
 
-<div class="methods">
-  <div [style.display]="searchStudentChanged===true?'block':'none'"   id="searchStudent">
+
+<div class="methods" [style.display]="methods===true?'block':'none'">
+
+  <button class="methods" (click)="methodsOff()">---<br />---</button>
+
+  <div class="searchStudent" >
     <input class="searchStudent" [(ngModel)]="searchStudent" >
-    <button (click)="searchStudents()">search</button>
+    <button class="searchStudent" (click)="searchStudents(searchStudent)">search</button>
   </div>
-  <div [style.display]="filterThreeStudentChanged===true?'block':'none'" id="filterThreeStudent">
-    <input type="checkbox" [(ngModel)]="filterThreeCheck" (change)="filterThreeStudent()"><b>mark unsuccessful students</b>
+
+  <div class="filterThreeStudent"  >
+    <input class="checkbox" type="checkbox" [(ngModel)]="filterThreeCheck" (change)="filterThreeStudent()"><b class="filterThreeStudent">mark unsuccessful students</b>
   </div>
-  <div [style.display]="filterStudentForDateChanged===true?'block':'none'" id="filterStudentForDate">
-    <b>filter Student for date</b><br />
+  <div class="filterStudentForDate" >
+    <b class="filterStudentForDate">student for date</b><br />
     <input type="date" class="minDate" [(ngModel)]="minDate" /> - <input type="date" class="maxDate" [(ngModel)]="maxDate" /><br />
-    <button (click)="filterStudent('forDate')">filter</button><button (click)="discharge()">discharge</button>
   </div>
-  <div [style.display]="filterStudentForScoreChanged===true?'block':'none'" id="filterStudentForScore">
-    <b>filter Student for score</b><br />
+  <div class="filterStudentForScore">
+    <b class="filterStudentForScore">student for score</b><br />
     <input type="number" class="minScore" [(ngModel)]="minScore" /> - <input type="namber" class="maxScore" [(ngModel)]="maxScore" /><br />
-    <button (click)="filterStudent('forScore')">filter</button><button (click)="discharge()">discharge</button>
   </div>
-
+  <div class="filterStudentFor"><button class="filterStudentFor" (click)="filterStudent()">filter</button><button class="filterStudentFor" (click)="discharge()">discharge</button></div>
 </div>
 </div>
 
 
 
 
-<div [style.display]="confirmation===true?'block':'none'" class="popup" id="popup">
+<div [style.display]="confirmation===true?'block':'none'" class="popup">
   <div class="popup-content">
     Delete this student?
   </div>

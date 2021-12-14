@@ -1,3 +1,7 @@
+*{
+ cursor: default;
+}
+
 .mainDiv{
   position: relative;
   width: 100%;
@@ -11,71 +15,195 @@
   width: 100px;
   font-size: 30px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  left: 0px;
+  margin-inline: auto;
 
-  left: calc(50% - 50px);
+}
 
+button.methods{
+  position: fixed;
+  z-index: 1;
+  right: 5px;
+  top: 5px;
+  width: 35px;
+  height: 35px;
 }
 
 /*-----------------------*/
+button.buttonDelete {
+  font-size: 25px;
+  width: 30px;
+  height: 31px;
+
+}
+
 
 table{
+  /*display: inline;*/
   position: relative;
   left: 0%;
-  width: 100%;
+  width: 70%;
   border: black 2px solid;
+  border-collapse: collapse;
+  background-color: orange;
+  margin-inline: auto;
+}
+
+.tableUp{
+  cursor: default;
+  font-size: 23px;
+  border-right: black 1px solid;
+  border-bottom: black 1px solid;
+}
+
+td{
+  text-align: center;
+  border-bottom: black 1px solid;
+}
+
+td.buttonDelete{
+  border-right: black 1px solid;
+}
+
+tr{
   font-size: 20px;
 }
 
-td {
-  border: 1px solid #000;
-}
 
 tr td:last-child {
-  width: 10%;
+  width: 9%;
   white-space: nowrap;
 }
 
+tr td:nth-child(5){
+  width: 15%;
+  white-space: nowrap;
+}
+
+tr td:nth-child(2) td:nth-child(3) td:nth-child(4){
+  width: 25%;
+  white-space: nowrap;
+}
+
+tr td:first-child{
+  width: 1%;
+}
+
+
 tr.searchStudent{
-  color: red;
+  /*color: #540000;*/
+  background-color: red;
+  font-weight: bold;
 }
 
 tr.filterThreeStudent{
-  color: blue;
+  /*color: #010149;*/
+  background-color: #2a2aee;
+  font-weight: bold;
 }
 
 /*-----------------------*/
 
 div.methods {
-  display: block;
-  position: relative;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  height: 236px;
+  width: 380px;
+  background-color: rgba(136, 136, 43, 0.89);
+  z-index: 2;
 }
 
-div.searchStudent {
-  display: block;
+
+div.searchStudent{
+  position: absolute;
+  left: 3px;
+  top: 5px;
 }
+button.searchStudent{
+  height: 30px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+
 div.filterThreeStudent{
-  display: block;
+  position: absolute;
+  left: 10px;
+  top: 50px;
 }
-div.filterStudentForScore{
-  display: block;
+b.filterThreeStudent {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
+
 div.filterStudentForDate{
-  display: block;
+  position: absolute;
+  left: 10px;
+  top: 80px;
 }
-b{
-  left: 20px;
+b.filterStudentForDate{
+  font-size: 20px;
+  font-weight: bold;
 }
+
+
+
+div.filterStudentForScore{
+  position: absolute;
+  left: 10px;
+  top: 137px;
+}
+b.filterStudentForScore{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+div.filterStudentFor{
+  position: absolute;
+  left: 10px;
+  top: 200px;
+
+}
+button.filterStudentFor{
+  height: 30px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+
+input{
+  height: 24px;
+  width: 144px;
+}
+
+
+input.checkbox{
+  width: 15px;
+  height: 15px;
+}
+
+
+
+
+
 /*-----------------------*/
+
+
+
+
+
+
 .popup{
   display: none;
   height: 200px;
   width: 200px;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(255, 123, 123, 0.5);
   position: relative;
   left: calc(50% - 100px);
-  top: calc(50% - 100px);
+  top: 10%;
 }
 
 .popup-content {
