@@ -1,16 +1,26 @@
-<div class="mainDiv" xmlns="http://www.w3.org/1999/html">
+<div [style.display]="confirmation===true?'block':'none'" class="popup">
+  <div class="popup-content">
+    Delete this student?
+  </div>
+  <button class="popupButtonYes" (click)="deleteStudent()">yes</button>
+  <button class="popupButtonNo" (click)="no()">no</button>
+</div>
 
-<button class="start" (click)="getStudent()">start</button>
+  <div class="mainDiv">
+<!--<button class="start" (click)="getStudent()">start</button>-->
+    <div class="start">STUDENTS TABLE</div>
   <button class="methods" (click)="methodsOn()">---<br />---</button>
 <table class="students">
-  <tr><th></th><th class="tableUp" (click)="sortStudent('Name')"><b [style.font-weight]="nameSort===true?'bold ':'normal'">Name</b></th>
+  <tr><th></th><th class="tableUp" (click)="sortStudent('Name')" ><b [style.font-weight]="nameSort===true?'bold ':'normal'">Name</b></th>
     <th class="tableUp" (click)="sortStudent('Surname')"><b [style.font-weight]="surnameSort===true?'bold':'normal '">Surname</b></th>
     <th class="tableUp" (click)="sortStudent('Patronymic')"><b [style.font-weight]="patronymicSort===true?'bold ':'normal'">Patronymic</b></th>
     <th class="tableUp" (click)="sortStudent('Date')"><b [style.font-weight]="dataSort===true?'bold ':'normal'">Date</b></th>
     <th class="tableUp" (click)="sortStudent('Score')"><b [style.font-weight]="scoreSort===true?'bold ':'normal'">Score</b></th></tr>
 
-  <tr [ngClass]="{'searchStudent': student.isChanged.searchStudent, 'filterThreeStudent': student.isChanged.filterThreeStudent}" *ngFor="let student of resultStudentList">
-    <td><button class="buttonDelete" (click)="saveIndex(student)"> - </button></td><td>{{student.studentName}}</td><td>{{student.studentSurname}}</td>
+  <tr [ngClass]="{'searchStudent': student.isChanged.searchStudent, 'filterThreeStudent': student.isChanged.filterThreeStudent, 'changStudent': student.isChanged.changStudent}"
+      *ngFor="let student of resultStudentList" (click)="saveIndex(student)">
+    <td><button class="buttonDelete" (click)="saveIndexDelete(student)"> - </button></td>
+    <td>{{student.studentName}}</td><td>{{student.studentSurname}}</td>
     <td>{{student.studentPatronymic}}</td> <td>{{student.studentDate.day}}.{{student.studentDate.month}}.{{student.studentDate.year}}</td><td>{{student.studentScore}}</td></tr>
 </table><br />
 
@@ -37,16 +47,22 @@
     <input type="number" class="minScore" [(ngModel)]="minScore" /> - <input type="namber" class="maxScore" [(ngModel)]="maxScore" /><br />
   </div>
   <div class="filterStudentFor"><button class="filterStudentFor" (click)="filterStudent()">filter</button><button class="filterStudentFor" (click)="discharge()">discharge</button></div>
+<!--  <div class="name_add_chang_student">Add or Chang</div>-->
+  <add_student class="addChang" (chang)="onClick($event)"
+               [name]= "this.index === undefined?'Name':this.resultStudentList[this.index].studentName"
+               [surname]="this.index === undefined?'Surname':this.resultStudentList[this.index].studentSurname"
+               [patronymic]="this.index === undefined?'Patronymic':this.resultStudentList[this.index].studentPatronymic"
+               [day]="this.index === undefined?1:this.resultStudentList[this.index].studentDate.day"
+               [year]="this.index === undefined?2010:this.resultStudentList[this.index].studentDate.year"
+               [month]="this.index === undefined?1:this.resultStudentList[this.index].studentDate.month"
+               [score]="this.index === undefined?5:this.resultStudentList[this.index].studentScore">  </add_student>
+
 </div>
-</div>
-
-
-
-
-<div [style.display]="confirmation===true?'block':'none'" class="popup">
-  <div class="popup-content">
-    Delete this student?
   </div>
-  <button class="popupButtonYes" (click)="deleteStudent()">yes</button>
-  <button class="popupButtonNo" (click)="no()">no</button>
-</div>
+
+
+
+
+
+
+

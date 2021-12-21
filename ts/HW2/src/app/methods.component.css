@@ -1,0 +1,40 @@
+
+input.AddStudentComponent{
+  height: 24px;
+  width: 144px;
+}
+
+button.add{
+  height: 30px;
+  font-size: 17px;
+  font-weight: bold;
+}
+button.chang{
+  height: 30px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+div.nameInput{
+  font-size: 17px;
+  font-weight: bold;
+}
+
+input.dateDay{
+  width: 40px;
+}
+
+input.dateMonth{
+  width: 40px;
+}
+
+input.dateYear{
+  width: 100px;
+}
+
+div.name_add_chang_student{
+  position: absolute;
+  left: 50%;
+  font-size: 19px;
+  font-weight: bold;
+}

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-
+// import {  } from "@angular/core";
 
 
 @Component({
@@ -13,18 +13,14 @@ import { Component } from "@angular/core";
 
 
 
-
-
-
-
-
-
 export class AppComponent {
+
 
   searchStudent = "";
   filterThreeCheck = false;
 
-  private index: number | undefined;
+  public index: number | undefined;
+
   public minScore: number | undefined;
   public maxScore: number | undefined;
   public minDate: string | undefined;
@@ -45,11 +41,14 @@ export class AppComponent {
   public studentList: {
     studentName: string; studentSurname: string; studentPatronymic: string;
     studentDate: { day: number, month: number, year: number }; studentScore: number; isChanged: {
-      searchStudent: boolean; filterThreeStudent: boolean;
+      searchStudent: boolean; filterThreeStudent: boolean; changStudent: boolean;
     };
   }[] = [];
 
   resultStudentList = this.studentList;
+  title = "";
+
+  studentChang = this.resultStudentList[0];
 
 
   public getStudent(): void {
@@ -62,7 +61,7 @@ export class AppComponent {
       studentPatronymic: "string31",
       studentDate: { day: 2, month: 12, year: 2001 },
       studentScore: 2,
-      isChanged: { searchStudent: false, filterThreeStudent: false }
+      isChanged: { searchStudent: false, filterThreeStudent: false, changStudent: false }
     };
 
     const student2 = {
@@ -71,7 +70,7 @@ export class AppComponent {
       studentPatronymic: "string32",
       studentDate: { day: 2, month: 2, year: 2005 },
       studentScore: 22,
-      isChanged: { searchStudent: false, filterThreeStudent: false }
+      isChanged: { searchStudent: false, filterThreeStudent: false, changStudent: false }
     };
 
     const student3 = {
@@ -80,7 +79,7 @@ export class AppComponent {
       studentPatronymic: "string33",
       studentDate: { day: 1, month: 12, year: 2010 },
       studentScore: 222,
-      isChanged: { searchStudent: false, filterThreeStudent: false }
+      isChanged: { searchStudent: false, filterThreeStudent: false, changStudent: false }
     };
 
     this.studentList.push(student1);
@@ -301,7 +300,26 @@ export class AppComponent {
 
   public saveIndex(student: {
     studentName: string; studentSurname: string; studentPatronymic: string; studentDate: { day: number, month: number, year: number };
-    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean };
+    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean, changStudent: boolean };
+  }): void {
+    for (const value of this.resultStudentList) {
+      value.isChanged.changStudent = false;
+    }
+
+
+
+    this.index = this.studentList.indexOf(student);
+
+    this.studentChang = this.resultStudentList[this.index];
+
+    this.resultStudentList[this.index].isChanged.changStudent = true;
+
+
+  }
+
+  public saveIndexDelete(student: {
+    studentName: string; studentSurname: string; studentPatronymic: string; studentDate: { day: number, month: number, year: number };
+    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean, changStudent: boolean };
   }): void {
 
     this.index = this.studentList.indexOf(student);
@@ -319,7 +337,8 @@ export class AppComponent {
       this.studentList.splice(this.index, 1);
     }
     this.resultStudentList = this.studentList;
-    this.no();
+    // this.no();
+    this.confirmation = false;
   }
 
   public methodsOff(): void {
@@ -333,6 +352,39 @@ export class AppComponent {
     this.methods = true;
 
   }
+
+
+  onClick(student: {
+    name: string; surname: string; patronymic: string;
+    date: { day: number, month: number, year: number }; score: number; type: string;
+  }): void{
+
+    if (student.type === "add") {
+    this.resultStudentList.push({ studentName: student.name, studentSurname: student.surname, studentPatronymic: student.patronymic,
+      studentDate: { day: student.date.day, month: student.date.month, year: student.date.year }, studentScore: student.score,
+      isChanged: { searchStudent: false, filterThreeStudent: false, changStudent: false } });
+    }
+
+    if (student.type === "chang"){
+      if (this.index !== undefined) {
+            this.resultStudentList[this.index].studentName = student.name;
+            this.resultStudentList[this.index].studentSurname = student.surname;
+            this.resultStudentList[this.index].studentPatronymic = student.patronymic;
+            this.resultStudentList[this.index].studentDate.day = student.date.day;
+            this.resultStudentList[this.index].studentDate.year = student.date.year;
+            this.resultStudentList[this.index].studentDate.month = student.date.month;
+            this.resultStudentList[this.index].studentScore = student.score;
+            this.resultStudentList[this.index].isChanged.filterThreeStudent = false;
+            this.resultStudentList[this.index].isChanged.searchStudent = false;
+            this.resultStudentList[this.index].isChanged.changStudent = false;
+          }
+    }
+
+
+  }
+
+
+
 
 
 }

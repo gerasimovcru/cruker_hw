@@ -1,0 +1,26 @@
+<div class="name_add_chang_student">Add or Chang</div>
+<div class="addStudent">
+ <form novalidate [formGroup]="studentForm" (ngSubmit)="_onSubmit()">
+   <div formGroupName="addStudent">
+     <div class="nameInput">Student name</div>
+     <input class="AddStudentComponent" formControlName="name" ><br />
+     <div class="nameInput">Student surname</div>
+     <input class="AddStudentComponent" formControlName="surname"><br />
+     <div class="nameInput">Student patronymic</div>
+     <input class="AddStudentComponent" formControlName="patronymic"><br />
+     <div class="nameInput">Student date</div>
+     <input type="number"  class="AddStudentComponent dateDay" formControlName="dateDay">
+     <input type="number"  class="AddStudentComponent dateMonth" formControlName="dateMonth">
+     <input type="number"  class="AddStudentComponent dateYear" formControlName="dateYear"><br />
+     <div class="nameInput">Student score</div>
+     <input type="number" class="AddStudentComponent" formControlName="score">
+   </div>
+
+ </form>
+   <button [disabled] = "add" type="button" class="add"  (click)="addStudentOnTable('add')">ADD</button>
+   <button [disabled] = "changed" type="button" class="chang"  (click)="addStudentOnTable('chang')">CHANG</button>
+
+
+
+</div>
+
