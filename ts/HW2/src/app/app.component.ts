@@ -338,9 +338,11 @@ export class AppComponent {
 
     this.confirmation = true;
 
-    // this.changeStudentForTable = true;
+    this.changeStudentForTable = false;
     //
     this.changed = false;
+
+    // changeStudentForTable
 
   }
 
