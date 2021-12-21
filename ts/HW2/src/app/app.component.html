@@ -1,3 +1,4 @@
+<button type="button" class="close" [style.display]="changeStudentForTable===true?'block':'none'" (click)="close()">X</button>
 <div [style.display]="confirmation===true?'block':'none'" class="popup">
   <div class="popup-content">
     Delete this student?
@@ -17,11 +18,14 @@
     <th class="tableUp" (click)="sortStudent('Date')"><b [style.font-weight]="dataSort===true?'bold ':'normal'">Date</b></th>
     <th class="tableUp" (click)="sortStudent('Score')"><b [style.font-weight]="scoreSort===true?'bold ':'normal'">Score</b></th></tr>
 
-  <tr [ngClass]="{'searchStudent': student.isChanged.searchStudent, 'filterThreeStudent': student.isChanged.filterThreeStudent, 'changStudent': student.isChanged.changStudent}"
-      *ngFor="let student of resultStudentList" (click)="saveIndex(student)">
+  <tr [ngClass]="{'searchStudent': student.isChanged.searchStudent, 'filterThreeStudent': student.isChanged.filterThreeStudent, 'changeStudent': student.isChanged.changeStudent}"
+      *ngFor="let student of resultStudentList" >
     <td><button class="buttonDelete" (click)="saveIndexDelete(student)"> - </button></td>
-    <td>{{student.studentName}}</td><td>{{student.studentSurname}}</td>
-    <td>{{student.studentPatronymic}}</td> <td>{{student.studentDate.day}}.{{student.studentDate.month}}.{{student.studentDate.year}}</td><td>{{student.studentScore}}</td></tr>
+    <td (click)="saveIndex(student)">{{student.studentName}}</td>
+    <td (click)="saveIndex(student)">{{student.studentSurname}}</td>
+    <td (click)="saveIndex(student)">{{student.studentPatronymic}}</td>
+    <td (click)="saveIndex(student)">{{student.studentDate.day}}.{{student.studentDate.month}}.{{student.studentDate.year}}</td>
+    <td (click)="saveIndex(student)">{{student.studentScore}}</td></tr>
 </table><br />
 
 
@@ -47,17 +51,19 @@
     <input type="number" class="minScore" [(ngModel)]="minScore" /> - <input type="namber" class="maxScore" [(ngModel)]="maxScore" /><br />
   </div>
   <div class="filterStudentFor"><button class="filterStudentFor" (click)="filterStudent()">filter</button><button class="filterStudentFor" (click)="discharge()">discharge</button></div>
-<!--  <div class="name_add_chang_student">Add or Chang</div>-->
-  <add_student class="addChang" (chang)="onClick($event)"
-               [name]= "this.index === undefined?'Name':this.resultStudentList[this.index].studentName"
-               [surname]="this.index === undefined?'Surname':this.resultStudentList[this.index].studentSurname"
-               [patronymic]="this.index === undefined?'Patronymic':this.resultStudentList[this.index].studentPatronymic"
-               [day]="this.index === undefined?1:this.resultStudentList[this.index].studentDate.day"
-               [year]="this.index === undefined?2010:this.resultStudentList[this.index].studentDate.year"
-               [month]="this.index === undefined?1:this.resultStudentList[this.index].studentDate.month"
-               [score]="this.index === undefined?5:this.resultStudentList[this.index].studentScore">  </add_student>
+  <add_student class="add" (changeStudentTable)="onClick($event)" [addStudentForTable] = "this.addStudentForTable">  </add_student>
 
 </div>
+
+    <add_student [style.display]="changed===true?'block':'none'" [changeStudentForTable] = "this.changeStudentForTable" [ngClass]="{'changed': changed}" (changeStudentTable)="onClick($event)"
+                 [name]= "this.index === undefined?'Name':this.resultStudentList[this.index].studentName"
+                 [surname]="this.index === undefined?'Surname':this.resultStudentList[this.index].studentSurname"
+                 [patronymic]="this.index === undefined?'Patronymic':this.resultStudentList[this.index].studentPatronymic"
+                 [day]="this.index === undefined?1:this.resultStudentList[this.index].studentDate.day"
+                 [year]="this.index === undefined?2010:this.resultStudentList[this.index].studentDate.year"
+                 [month]="this.index === undefined?1:this.resultStudentList[this.index].studentDate.month"
+                 [score]="this.index === undefined?5:this.resultStudentList[this.index].studentScore">
+                </add_student>
   </div>
 
 

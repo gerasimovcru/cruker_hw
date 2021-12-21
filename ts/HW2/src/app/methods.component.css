@@ -9,7 +9,7 @@ button.add{
   font-size: 17px;
   font-weight: bold;
 }
-button.chang{
+button.change{
   height: 30px;
   font-size: 17px;
   font-weight: bold;
@@ -32,9 +32,7 @@ input.dateYear{
   width: 100px;
 }
 
-div.name_add_chang_student{
-  position: absolute;
-  left: 50%;
-  font-size: 19px;
-  font-weight: bold;
+.error{
+  color: red;
+  font-size: 20px;
 }

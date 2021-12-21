@@ -18,6 +18,10 @@ export class AppComponent {
 
   searchStudent = "";
   filterThreeCheck = false;
+  changed = false;
+
+  addStudentForTable = false;
+  changeStudentForTable = false;
 
   public index: number | undefined;
 
@@ -41,14 +45,14 @@ export class AppComponent {
   public studentList: {
     studentName: string; studentSurname: string; studentPatronymic: string;
     studentDate: { day: number, month: number, year: number }; studentScore: number; isChanged: {
-      searchStudent: boolean; filterThreeStudent: boolean; changStudent: boolean;
+      searchStudent: boolean; filterThreeStudent: boolean; changeStudent: boolean;
     };
   }[] = [];
 
   resultStudentList = this.studentList;
   title = "";
 
-  studentChang = this.resultStudentList[0];
+  studentChange = this.resultStudentList[0];
 
 
   public getStudent(): void {
@@ -61,7 +65,7 @@ export class AppComponent {
       studentPatronymic: "string31",
       studentDate: { day: 2, month: 12, year: 2001 },
       studentScore: 2,
-      isChanged: { searchStudent: false, filterThreeStudent: false, changStudent: false }
+      isChanged: { searchStudent: false, filterThreeStudent: false, changeStudent: false }
     };
 
     const student2 = {
@@ -70,7 +74,7 @@ export class AppComponent {
       studentPatronymic: "string32",
       studentDate: { day: 2, month: 2, year: 2005 },
       studentScore: 22,
-      isChanged: { searchStudent: false, filterThreeStudent: false, changStudent: false }
+      isChanged: { searchStudent: false, filterThreeStudent: false, changeStudent: false }
     };
 
     const student3 = {
@@ -79,7 +83,7 @@ export class AppComponent {
       studentPatronymic: "string33",
       studentDate: { day: 1, month: 12, year: 2010 },
       studentScore: 222,
-      isChanged: { searchStudent: false, filterThreeStudent: false, changStudent: false }
+      isChanged: { searchStudent: false, filterThreeStudent: false, changeStudent: false }
     };
 
     this.studentList.push(student1);
@@ -300,31 +304,43 @@ export class AppComponent {
 
   public saveIndex(student: {
     studentName: string; studentSurname: string; studentPatronymic: string; studentDate: { day: number, month: number, year: number };
-    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean, changStudent: boolean };
+    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean, changeStudent: boolean };
   }): void {
+
+
     for (const value of this.resultStudentList) {
-      value.isChanged.changStudent = false;
+      value.isChanged.changeStudent = false;
     }
 
 
 
     this.index = this.studentList.indexOf(student);
 
-    this.studentChang = this.resultStudentList[this.index];
+    this.studentChange = this.resultStudentList[this.index];
 
-    this.resultStudentList[this.index].isChanged.changStudent = true;
+    this.resultStudentList[this.index].isChanged.changeStudent = true;
+
+    this.changed = true;
+
+    this.changeStudentForTable = true;
+
+
 
 
   }
 
   public saveIndexDelete(student: {
     studentName: string; studentSurname: string; studentPatronymic: string; studentDate: { day: number, month: number, year: number };
-    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean, changStudent: boolean };
+    studentScore: number; isChanged: { searchStudent: boolean, filterThreeStudent: boolean, changeStudent: boolean };
   }): void {
 
     this.index = this.studentList.indexOf(student);
 
     this.confirmation = true;
+
+    // this.changeStudentForTable = true;
+    //
+    this.changed = false;
 
   }
 
@@ -350,6 +366,7 @@ export class AppComponent {
   public methodsOn(): void {
 
     this.methods = true;
+    this.addStudentForTable = true;
 
   }
 
@@ -362,10 +379,10 @@ export class AppComponent {
     if (student.type === "add") {
     this.resultStudentList.push({ studentName: student.name, studentSurname: student.surname, studentPatronymic: student.patronymic,
       studentDate: { day: student.date.day, month: student.date.month, year: student.date.year }, studentScore: student.score,
-      isChanged: { searchStudent: false, filterThreeStudent: false, changStudent: false } });
+      isChanged: { searchStudent: false, filterThreeStudent: false, changeStudent: false } });
     }
 
-    if (student.type === "chang"){
+    if (student.type === "change"){
       if (this.index !== undefined) {
             this.resultStudentList[this.index].studentName = student.name;
             this.resultStudentList[this.index].studentSurname = student.surname;
@@ -376,14 +393,22 @@ export class AppComponent {
             this.resultStudentList[this.index].studentScore = student.score;
             this.resultStudentList[this.index].isChanged.filterThreeStudent = false;
             this.resultStudentList[this.index].isChanged.searchStudent = false;
-            this.resultStudentList[this.index].isChanged.changStudent = false;
+            this.resultStudentList[this.index].isChanged.changeStudent = false;
           }
     }
 
+    this.changed = false;
+    this.changeStudentForTable = false;
 
   }
 
+  public close(): void{
 
+    this.changed = false;
+
+    this.changeStudentForTable = false;
+
+  }
 
 
 

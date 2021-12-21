@@ -34,6 +34,7 @@ button.buttonDelete {
   font-size: 25px;
   width: 30px;
   height: 31px;
+  z-index: 1;
 
 }
 
@@ -96,7 +97,7 @@ tr.searchStudent{
   font-weight: bold;
 }
 
-tr.changStudent{
+tr.changeStudent{
   font-weight: bold;
 }
 
@@ -240,7 +241,7 @@ input.checkbox{
 }
 
 
-.addChang{
+.add{
   /*display: none;*/
   position: absolute;
   top: 235px;
@@ -250,4 +251,22 @@ input.checkbox{
   width: 100%;
 }
 
+.changed{
+  position: fixed;
+  top: calc(50% - 141px);
+  left: calc(50% - 105px);
+  width: 210px;
+
+  /*border: black 1px solid;*/
+  background-color: rgba(136, 136, 2, 0.89);
+}
+
+button.close{
+  position: fixed;
+  right: calc(50% - 100px);
+  top: calc(50% - 140px);
+  z-index: 1;
+  font-size: 19px;
+  font-weight: bold;
+}
 

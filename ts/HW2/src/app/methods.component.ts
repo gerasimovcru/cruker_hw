@@ -13,15 +13,36 @@ function getErrorName(surname: string, patronymic: string): ValidatorFn {
 const date = new Date();
 
 
-  return (control: AbstractControl): { invalidName: string } | null => {
+  return (control: AbstractControl): { errorStudentForm: string } | null => {
 
-    if (control.value.name === control.value.surname || control.value.name  === control.value.patronymic ||
-      (control.value.dateYear + 10 > date.getFullYear() ||
-        (control.value.dateYear + 10 >= date.getFullYear() && control.value.dateMonth > date.getMonth()) ||
-        (control.value.dateYear + 10 >= date.getFullYear() && control.value.dateMonth >= date.getMonth() && control.value.dateDay > date.getDay() ))){
 
-      return { invalidName: "error" };
+    if (control.value.name === control.value.surname || control.value.name  === control.value.patronymic){
+      console.log(control.value.surname);
+      return { errorStudentForm: "Error: name and surname or patronymic are equal" };
     }
+    if (control.value.dateYear + 10 > date.getFullYear() ||
+      (control.value.dateYear + 10 >= date.getFullYear() && control.value.dateMonth > date.getMonth()) ||
+      (control.value.dateYear + 10 >= date.getFullYear() && control.value.dateMonth >= date.getMonth() && control.value.dateDay > date.getDay() )){
+      return { errorStudentForm: "Error: you are under 10 years old" };
+    }
+    if (control.value.name.length < 2){
+      return { errorStudentForm: "Error: short name" };
+    }
+    if (control.value.surname.length < 2){
+      return { errorStudentForm: "Error: short surname" };
+    }
+    if (control.value.patronymic.length < 2){
+      return { errorStudentForm: "Error: short patronymic" };
+    }
+    if (control.value.score < 1 || control.value.score > 5){
+      return { errorStudentForm: "Error: wrong score" };
+    }
+    if ((control.value.dateYear < 1900 || control.value.dateYear > 2200) ||
+      (control.value.dateMonth < 1 || control.value.dateMonth > 12) ||
+      (control.value.dateDay < 1 || control.value.dateDay > 31)){
+      return { errorStudentForm: "Error: wrong data" };
+    }
+
 
     return null;
   };
@@ -41,8 +62,10 @@ export class AddStudentComponent {
 
 
 
-  @Output() chang = new EventEmitter();
+  @Output() changeStudentTable = new EventEmitter();
 
+  @Input() addStudentForTable: boolean | undefined;
+  @Input() changeStudentForTable: boolean | undefined;
 
   @Input() name: string = "Name";
   @Input() surname: string = "Surname";
@@ -73,13 +96,13 @@ export class AddStudentComponent {
 
   studentForm: FormGroup = new FormGroup({
     addStudent: new FormGroup({
-      name: new FormControl(this.name, [Validators.required, Validators.minLength(2) ]),
-      surname: new FormControl(this.surname, [Validators.required, Validators.minLength(2) ]),
-      patronymic: new FormControl(this.patronymic, [Validators.required, Validators.minLength(2) ]),
-      dateDay: new FormControl( this.day, [Validators.required, Validators.min(1), Validators.max(31) ]),
-      dateMonth: new FormControl(this.month, [Validators.required, Validators.min(1), Validators.max(12) ]),
-      dateYear: new FormControl(this.year, [Validators.required, Validators.min(1900), Validators.max(2222) ]),
-      score: new FormControl(this.score, [Validators.required, Validators.min(1), Validators.max(5)]),
+      name: new FormControl(this.name, [Validators.required]),
+      surname: new FormControl(this.surname, [Validators.required]),
+      patronymic: new FormControl(this.patronymic, [Validators.required]),
+      dateDay: new FormControl( this.day, [Validators.required]),
+      dateMonth: new FormControl(this.month, [Validators.required]),
+      dateYear: new FormControl(this.year, [Validators.required]),
+      score: new FormControl(this.score, [Validators.required]),
     }, { validators: getErrorName(this.surname, this.patronymic) })
 
   });
@@ -87,6 +110,8 @@ export class AddStudentComponent {
 
 
   public addStudentOnTable(ac: string): void {
+
+    console.log(this.name);
 
 
       this.student.name = this.studentForm.get("addStudent.name")?.value;
@@ -97,8 +122,9 @@ export class AddStudentComponent {
       this.student.date.year = this.studentForm.get("addStudent.dateYear")?.value;
       this.student.score = this.studentForm.get("addStudent.score")?.value;
 
-      console.log(this.studentForm.get("addStudent.dateMonth"));
-      if (!this.studentForm.get("addStudent")?.getError("invalidName") &&
+      console.log(this.studentForm.get("addStudent"));
+      this.errors();
+      if (!this.studentForm.get("addStudent")?.getError("errorStudentForm") &&
         !this.studentForm.get("addStudent.name")?.errors &&
         !this.studentForm.get("addStudent.surname")?.errors &&
         !this.studentForm.get("addStudent.patronymic")?.errors &&
@@ -106,11 +132,60 @@ export class AddStudentComponent {
         !this.studentForm.get("addStudent.dateMonth")?.errors &&
         !this.studentForm.get("addStudent.dateYear")?.errors &&
         !this.studentForm.get("addStudent.score")?.errors) {
+
         this.student.type = ac;
-        this.chang.emit(this.student);
+        this.changeStudentTable.emit(this.student);
+
       }
 
 
+
+
+
+  }
+
+  errorMy = false;
+  errorName = false;
+  errorSurname = false;
+  errorPatronymic = false;
+  errorScore = false;
+  errorDateDay = false;
+  errorDateMonth = false;
+  errorDateYear = false;
+
+
+  public errors(): void {
+    if (this.studentForm.get("addStudent")?.getError("errorStudentForm")) {
+      this.errorMy = true;
+    }
+
+    if (this.studentForm.get("addStudent.name")?.errors) {
+      this.errorName = true;
+    }
+
+    if (this.studentForm.get("addStudent.surname")?.errors) {
+      this.errorSurname = true;
+    }
+
+    if (this.studentForm.get("addStudent.patronymic")?.errors) {
+      this.errorPatronymic = true;
+    }
+
+    if (this.studentForm.get("addStudent.dateDay")?.errors) {
+      this.errorDateDay = true;
+    }
+
+    if (this.studentForm.get("addStudent.dateMonth")?.errors) {
+      this.errorDateMonth = true;
+    }
+
+    if (this.studentForm.get("addStudent.dateYear")?.errors) {
+      this.errorDateYear = true;
+    }
+
+    if (this.studentForm.get("addStudent.score")?.errors) {
+      this.errorScore = true;
+    }
 
   }
 

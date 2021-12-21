@@ -1,4 +1,4 @@
-<div class="name_add_chang_student">Add or Chang</div>
+
 <div class="addStudent">
  <form novalidate [formGroup]="studentForm" (ngSubmit)="_onSubmit()">
    <div formGroupName="addStudent">
@@ -17,10 +17,10 @@
    </div>
 
  </form>
-   <button [disabled] = "add" type="button" class="add"  (click)="addStudentOnTable('add')">ADD</button>
-   <button [disabled] = "changed" type="button" class="chang"  (click)="addStudentOnTable('chang')">CHANG</button>
+   <button  type="button" [style.display]="addStudentForTable===true?'block':'none'" class="add"  (click)="addStudentOnTable('add')" >ADD</button>
+   <button  type="button" [style.display]="changeStudentForTable===true?'block':'none'" class="change"  (click)="addStudentOnTable('change')">CHANGE</button>
 
-
+<div [style.display]="errorMy===true?'block':'none'" class="error">{{this.studentForm.get("addStudent")?.getError("errorStudentForm")}}</div>
 
 </div>
 
