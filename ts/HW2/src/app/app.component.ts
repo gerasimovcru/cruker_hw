@@ -16,6 +16,8 @@ import { Component } from "@angular/core";
 export class AppComponent {
 
 
+
+
   searchStudent = "";
   filterThreeCheck = false;
   changed = false;
@@ -327,6 +329,7 @@ export class AppComponent {
 
 
 
+
   }
 
   public saveIndexDelete(student: {
@@ -411,8 +414,6 @@ export class AppComponent {
     this.changeStudentForTable = false;
 
   }
-
-
 
 }
 

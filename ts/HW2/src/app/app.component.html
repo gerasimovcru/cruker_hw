@@ -51,7 +51,7 @@
     <input type="number" class="minScore" [(ngModel)]="minScore" /> - <input type="namber" class="maxScore" [(ngModel)]="maxScore" /><br />
   </div>
   <div class="filterStudentFor"><button class="filterStudentFor" (click)="filterStudent()">filter</button><button class="filterStudentFor" (click)="discharge()">discharge</button></div>
-  <add_student class="add" (changeStudentTable)="onClick($event)" [addStudentForTable] = "this.addStudentForTable">  </add_student>
+  <add_student class="add" (changeStudentTable)="onClick($event)" [addStudentForTable] = "this.addStudentForTable" >  </add_student>
 
 </div>
 
@@ -62,7 +62,8 @@
                  [day]="this.index === undefined?1:this.resultStudentList[this.index].studentDate.day"
                  [year]="this.index === undefined?2010:this.resultStudentList[this.index].studentDate.year"
                  [month]="this.index === undefined?1:this.resultStudentList[this.index].studentDate.month"
-                 [score]="this.index === undefined?5:this.resultStudentList[this.index].studentScore">
+                 [score]="this.index === undefined?5:this.resultStudentList[this.index].studentScore"
+                 [newStudent]="{}">
                 </add_student>
   </div>
 
