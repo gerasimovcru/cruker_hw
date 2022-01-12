@@ -1,0 +1,28 @@
+{
+  "Student": [
+    {
+      "studentName":"ИвановBD",
+      "studentSurname": "ИванBD",
+      "studentPatronymic":"ИвановичBD",
+      "studentDate": {
+        "day": 6,
+        "month": 6,
+        "year": 2003
+      },
+      "studentScore": 3
+
+    },
+    {
+      "studentName":"АлекстандрBD",
+      "studentSurname": "АлександровBD",
+      "studentPatronymic":"АлександровичBD",
+      "studentDate": {
+        "day": 23,
+        "month": 3,
+        "year": 1993
+      },
+      "studentScore": 4
+
+    }
+  ]
+}

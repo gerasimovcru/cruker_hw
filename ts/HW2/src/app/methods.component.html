@@ -1,35 +1,35 @@
-
+<button class="addButton" routerLink="form/addStudent" (click)="enable()">+</button>
 <div class="addStudent">
  <form [formGroup]="studentForm" novalidate (ngSubmit)="_onSubmit()">
    <div formGroupName="addStudent">
      <div class="nameInput">Student name <div [style.display]="errorName===true?'inline':'none'" class="error">   error: small name</div></div>
 <!--     <input class="AddStudentComponent" formControlName="name" value="{{this.name}}"><br />-->
-     <input class="AddStudentComponent" formControlName="name" [(ngModel)]="this.name" ><br />
+     <input [attr.disabled]="ed ? false : null"  class="AddStudentComponent" type="text" formControlName="name"><br />
      <div class="nameInput">Student surname <div [style.display]="errorSurname===true?'inline':'none'" class="error">   error: small surname</div></div>
 <!--     <input class="AddStudentComponent" formControlName="surname" value="{{this.surname}}"><br />-->
-     <input class="AddStudentComponent" formControlName="surname" [(ngModel)]="this.surname"><br />
+     <input [attr.disabled]="ed ? false : null" class="AddStudentComponent" formControlName="surname" [(ngModel)]="this.surname"><br />
      <div class="nameInput">Student patronymic <div [style.display]="errorPatronymic===true?'inline':'none'" class="error">   error: small patronymic</div></div>
 <!--     <input class="AddStudentComponent" formControlName="patronymic" value="{{this.patronymic}}"><br />-->
-     <input class="AddStudentComponent" formControlName="patronymic" [(ngModel)]="this.patronymic"><br />
+     <input [attr.disabled]="ed ? false : null" class="AddStudentComponent" formControlName="patronymic" [(ngModel)]="this.patronymic"><br />
      <div formGroupName="studentData">
      <div class="nameInput">Student date</div>
 <!--       <input type="number"  class="AddStudentComponent dateDay" formControlName="dateDay" value="{{this.day}}">-->
 <!--       <input type="number"  class="AddStudentComponent dateMonth" formControlName="dateMonth" value="{{this.month}}">-->
 <!--       <input type="number"  class="AddStudentComponent dateYear" formControlName="dateYear" value="{{this.year}}">-->
-       <input type="number"  class="AddStudentComponent dateDay" formControlName="dateDay" [(ngModel)]="this.day">
-       <input type="number"  class="AddStudentComponent dateMonth" formControlName="dateMonth" [(ngModel)]="this.month">
-       <input type="number"  class="AddStudentComponent dateYear" formControlName="dateYear" [(ngModel)]="this.year">
+       <input  [attr.disabled]="ed ? false : null" type="number"  class="AddStudentComponent dateDay" formControlName="dateDay" [(ngModel)]="this.day">
+       <input  [attr.disabled]="ed ? false : null" type="number"  class="AddStudentComponent dateMonth" formControlName="dateMonth" [(ngModel)]="this.month">
+       <input [attr.disabled]="ed ? false : null" type="number"  class="AddStudentComponent dateYear" formControlName="dateYear" [(ngModel)]="this.year">
        <div [style.display]="errorDate===true?'inline':'none'" class="error">{{this.studentForm.get("addStudent.studentData")?.getError("errorDataForm")}}</div>
      </div><div [style.display]="errorDate===true?'block':'none'" class="error">{{this.studentForm.get("addStudent.studentData")?.getError("errorStudentDate")}}</div>
 
      <div class="nameInput">Student score <div [style.display]="errorScore===true?'inline':'none'" class="error">   error: wrong score</div></div>
 <!--     <input type="number" class="AddStudentComponent" formControlName="score" value="{{this.score}}">-->
-     <input type="number" class="AddStudentComponent" formControlName="score" [(ngModel)]="this.score">
+     <input [attr.disabled]="ed ? false : null" type="number" class="AddStudentComponent" formControlName="score" [(ngModel)]="this.score">
    </div>
 
  </form>
-   <button  type="button" [style.display]="addStudentForTable===true?'block':'none'" class="add"  (click)="addStudentOnTable('add')" >ADD</button>
-   <button  type="button" [style.display]="changeStudentForTable===true?'block':'none'" class="change"  (click)="addStudentOnTable('change')">CHANGE</button>
+   <button type="button" [style.display]="addStudentForTable===true?'block':'none'" class="add"  (click)="addStudentOnTable('add')" >ADD</button>
+   <button type="button" [style.display]="changeStudentForTable===true?'block':'none'" class="change"  (click)="addStudentOnTable('change')">CHANGE</button>
 
 <div [style.display]="errorMy===true?'block':'none'" class="error">{{this.studentForm.get("addStudent")?.getError("errorStudentForm")}}</div>
 

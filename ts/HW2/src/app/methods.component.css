@@ -36,3 +36,13 @@ input.dateYear{
   color: red;
   font-size: 18px;
 }
+
+button.addButton{
+  font-size: 32px;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+  position: fixed;
+  right: 10px;
+  top: 250px;
+}

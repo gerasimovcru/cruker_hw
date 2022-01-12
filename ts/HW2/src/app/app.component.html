@@ -10,22 +10,23 @@
   <div class="mainDiv">
 <!--<button class="start" (click)="getStudent()">start</button>-->
     <div class="start">STUDENTS TABLE</div>
-  <button class="methods" (click)="methodsOn()">---<br />---</button>
+  <button class="methods" (click)="methodsOn()" >---<br />---</button>
 <table class="students">
-  <tr><th></th><th class="tableUp" (click)="sortStudent('Name')" ><b [style.font-weight]="nameSort===true?'bold ':'normal'">Name</b></th>
-    <th class="tableUp" (click)="sortStudent('Surname')"><b [style.font-weight]="surnameSort===true?'bold':'normal '">Surname</b></th>
-    <th class="tableUp" (click)="sortStudent('Patronymic')"><b [style.font-weight]="patronymicSort===true?'bold ':'normal'">Patronymic</b></th>
-    <th class="tableUp" (click)="sortStudent('Date')"><b [style.font-weight]="dataSort===true?'bold ':'normal'">Date</b></th>
-    <th class="tableUp" (click)="sortStudent('Score')"><b [style.font-weight]="scoreSort===true?'bold ':'normal'">Score</b></th></tr>
+  <tr><th></th><th  (click)="sortStudent('Name')" ><b [style.font-weight]="nameSort===true?'bold ':'normal'">Name</b></th>
+    <th  (click)="sortStudent('Surname')"><b [style.font-weight]="surnameSort===true?'bold':'normal '">Surname</b></th>
+    <th  class="tableUp" (click)="sortStudent('Patronymic')"><b [style.font-weight]="patronymicSort===true?'bold ':'normal'">Patronymic</b></th>
+    <th  (click)="sortStudent('Date')"><b [style.font-weight]="dataSort===true?'bold ':'normal'">Date</b></th>
+    <th  (click)="sortStudent('Score')"><b [style.font-weight]="scoreSort===true?'bold ':'normal'">Score</b></th></tr>
 
-  <tr [ngClass]="{'searchStudent': student.isChanged.searchStudent, 'filterThreeStudent': student.isChanged.filterThreeStudent, 'changeStudent': student.isChanged.changeStudent}"
+  <tr focus [ngClass]="{'searchStudent': student.isChanged.searchStudent, 'filterThreeStudent': student.isChanged.filterThreeStudent, 'changeStudent': student.isChanged.changeStudent}"
       *ngFor="let student of resultStudentList" >
     <td><button class="buttonDelete" (click)="saveIndexDelete(student)"> - </button></td>
-    <td (click)="saveIndex(student)">{{student.studentName}}</td>
-    <td (click)="saveIndex(student)">{{student.studentSurname}}</td>
-    <td (click)="saveIndex(student)">{{student.studentPatronymic}}</td>
+    <td (click)="saveIndex(student)">{{student.studentName | uppercase}}</td>
+    <td (click)="saveIndex(student)">{{student.studentSurname | uppercase}}</td>
+    <td (click)="saveIndex(student)">{{student.studentPatronymic | uppercase}}</td>
     <td (click)="saveIndex(student)">{{student.studentDate.day}}.{{student.studentDate.month}}.{{student.studentDate.year}}</td>
-    <td (click)="saveIndex(student)">{{student.studentScore}}</td></tr>
+    <td (click)="saveIndex(student)">{{student.studentScore}}</td>
+    <td><button class="buttonChange" (click)="saveIndex(student)" routerLink="form/editStudent"> ch </button></td></tr>
 </table><br />
 
 

@@ -1,0 +1,23 @@
+{
+  "name": "ser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ser.js",
+    "dev": "nodemon ser.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "querystring": "^0.2.1",
+    "sqlite3": "^5.0.2",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

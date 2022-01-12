@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 // import {  } from "@angular/core";
 
 
@@ -6,8 +6,8 @@ import { Component } from "@angular/core";
 
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
-
+  styleUrls: ["./app.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 
@@ -21,6 +21,7 @@ export class AppComponent {
   searchStudent = "";
   filterThreeCheck = false;
   changed = false;
+  ed = false;
 
   addStudentForTable = false;
   changeStudentForTable = false;
@@ -365,6 +366,7 @@ export class AppComponent {
   public methodsOff(): void {
 
     this.methods = false;
+    this.ed = false;
 
   }
 
@@ -413,6 +415,10 @@ export class AppComponent {
 
     this.changeStudentForTable = false;
 
+  }
+
+  public enable(): void{
+    this.ed = true;
   }
 
 }

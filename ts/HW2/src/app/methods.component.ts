@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
 import {
   AbstractControl,
   FormControl,
@@ -6,32 +6,6 @@ import {
   Validators,
 } from "@angular/forms";
 
-
-// function getErrorName(surname: string, patronymic: string): ValidatorFn {
-//
-// const date = new Date();
-//
-//
-//   return (control: AbstractControl): { errorStudentForm: string } | null => {
-//
-//
-//     if (control.value.name.length < 2){
-//       return { errorStudentForm: "Error: short name" };
-//     }
-//     if (control.value.surname.length < 2){
-//       return { errorStudentForm: "Error: short surname" };
-//     }
-//     if (control.value.patronymic.length < 2){
-//       return { errorStudentForm: "Error: short patronymic" };
-//     }
-//     if (control.value.score < 1 || control.value.score > 5){
-//       return { errorStudentForm: "Error: wrong score" };
-//     }
-//
-//
-//     return null;
-//   };
-// }
 
 
 class ValidatorErrors {
@@ -86,8 +60,8 @@ function getErrorData(control: AbstractControl): ValidatorErrors | null {
 
   selector: "add_student",
   templateUrl: "./methods.component.html",
-  styleUrls: ["./methods.component.css"]
-
+  styleUrls: ["./methods.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 
@@ -110,6 +84,7 @@ console.log(123);
   @Input() month: number = 1;
   @Input() year: number = 2010;
   @Input() score: number = 5;
+  ed = true;
 
   student = {
     name: this.name, surname: this.surname, patronymic: this.patronymic,
@@ -119,7 +94,6 @@ console.log(123);
 
   add = false;
   changed = false;
-
 
   studentForm: FormGroup = new FormGroup({ addStudent: new FormGroup({
       name: new FormControl(this.student.name, [Validators.required, Validators.minLength(2)]),
@@ -158,7 +132,7 @@ console.log(123);
 
       this.student.type = ac;
       this.changeStudentTable.emit(this.student);
-
+      this.ed = true;
 
     }
 
@@ -228,6 +202,10 @@ console.log(123);
 
     this.student.name = this.studentForm.controls["addStudent.name"].value;
 
+  }
+
+  public enable(): void{
+    this.ed = false;
   }
 
 }

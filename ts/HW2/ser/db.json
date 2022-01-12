@@ -1,0 +1,18 @@
+{
+  "studentName": ["ИвановBD", "АлекстандрBD"],
+  "studentSurname": ["ИванBD", "АлександровBD"],
+  "studentPatronymic": ["ИвановичBD", "АлександровичBD"],
+  "studentDate": [
+    {
+      "year": 1999,
+      "month": 2,
+      "date": 2
+    },
+    {
+      "year": 2001,
+      "month": 3,
+      "date": 23
+    },
+  ],
+  "studentScore": [3, 4]
+}
